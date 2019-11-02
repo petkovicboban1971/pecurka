@@ -1,0 +1,398 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+}
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+
+
+.fa-2x {
+font-size: 2em;
+}
+.fa {
+position: relative;
+display: table-cell;
+width: 60px;
+height: 36px;
+text-align: center;
+vertical-align: middle;
+font-size:20px;
+}
+
+
+.main-menu:hover,nav.main-menu.expanded {
+width:250px;
+overflow:visible;
+}
+
+.main-menu {
+background: #cc0000;
+border-right:2px solid #330000;
+position:absolute;
+  position: fixed;
+top:0;
+bottom:0;
+height:99%;
+left:0;
+width:60px;
+overflow:hidden;
+-webkit-transition:width .05s linear;
+transition:width .05s linear;
+-webkit-transform:translateZ(0) scale(1,1);
+z-index:1000;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+}
+
+.main-menu>ul {
+margin:7px 0;
+}
+
+.main-menu li {
+position:relative;
+display:block;
+vertical-align: middle;
+width:250px;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color:#cccccc;
+ font-family: arial;
+font-size: 18px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .1s linear;
+transition:all .1s linear;
+  
+}
+
+.main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+height:36px;
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+}
+
+.main-menu .nav-text {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+width:190px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+position:absolute;
+left:0;
+bottom:0;
+}
+
+.no-touch .scrollable.hover {
+overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+overflow-y:auto;
+overflow:visible;
+}
+
+a:hover,a:focus {
+text-decoration:none;
+}
+
+nav {
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+-o-user-select:none;
+user-select:none;
+}
+
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+color:#fff;
+background-color:#000;
+}
+.area {
+float: left;
+background: #f2f2f2;
+padding-right: -10px;
+width: 100%;
+height: 100%;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+#datum{
+  clear: both;
+	position: absolute;
+  background:  #cc0000;
+	left: 80%;
+  top: 10px;
+	padding: 10px;
+	border: 2px solid #4d0000;
+  border-radius: 6px ;
+  -webkit-border-radius: 6px ;
+  -moz-border-radius: 6px ;
+  color: #fff;
+  font-size: 14pt;
+}
+#stranica{
+  clear: both;
+  position: absolute;
+  background:  #cc0000;
+  left: 25%;
+  top: 10px;
+  padding: 10px;
+  border: 2px solid #4d0000;
+  border-radius: 6px ;
+  -webkit-border-radius: 6px ;
+  -moz-border-radius: 6px ;
+  color: #fff;
+  font-size: 14pt;
+}
+#main-zadRad{
+  max-width: 95%;
+  padding: 10px;
+}
+#main-pregRad{
+	margin-left: 250px;
+	padding: 10px;
+  font-size: 15pt;
+}
+#izborProizvoda1{
+	position: relative;
+	left: 120px;
+	display: initial; 
+}
+#izborProizvoda1 button{
+	margin: 5px;
+}
+#radnik-kupac{
+	position: absolute;
+	padding: 14px;
+	font-size: 16pt;
+	background-color: #cc0000;
+	color: white;
+	text-align: center;
+	left: 33%;
+	max-width: 600px;
+	border: 2px solid #4d0000;
+  	border-radius: 8px ;
+  	-webkit-border-radius: 8px ;
+  	-moz-border-radius: 8px ;
+}
+
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+  text-align: left;
+  color: #185875;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	  padding-bottom: 2%;
+	  padding-top: 2%;
+  padding-left:2%;  
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	  background-color: #2C3446;
+}
+
+.container th {
+	  background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: #FFF842;
+  color: #403E10;
+  font-weight: bold;
+  
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+.container td:nth-child(4),
+.container th:nth-child(4) { display: none; }
+}
+
+#ispisNarudzbine{
+	position: absolute;
+	left: 600px;
+	padding: 5px;
+  	font-size: 14pt;
+}
+
+.modal-header {
+    padding:9px 15px;
+    border-bottom:4px solid #cccccc;
+    background-color: #cc0000;
+    color: white;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+  }
+.modal-footer
+  {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;/*
+    border-bottom:10px solid #cc0000;*/
+    -webkit-border-bottom-left-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    -moz-border-radius-bottomright: 6px;
+  }
+#ram{
+  position: relative;
+  background-color: #fff; 
+  margin: 73px 25px 35px 275px;
+  padding: 25px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  box-shadow: 0px 5px 5px 0px;
+}
+#ram button{
+  display: inline-flex; 
+  margin: 7px; 
+  color: #000; 
+  border: 1px solid gray; 
+  border-radius: 3px; 
+  width: 110px;
+  text-align: center;
+}
+
+#ram p{
+  color: #cc0000;
+  font-size: 20px;
+}
+
+#ram button:hover{
+    color:#cc0000;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); 
+}
+#ram td{
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+#ram thead{
+    border-bottom: 1px solid #cc0000;    
+    font-weight: bold;
+}
+#ram tr:hover{ 
+    background-color: #f5f5f5;
+}
+#ram th{    
+    font-weight: normal;
+    text-align: center;
+}
+#ram th a{ 
+    color: #000;
+}
+#ram .ukIznos{
+    width: 300px;
+    border: 2px solid #cc0000;
+    padding: 3px;
+    margin-bottom: 7px;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #cccccc;
+}
+
+#KolicinaModal .modal-header{
+    padding:9px 15px;
+    border-bottom:4px solid #cccccc;
+    background-color: #cc0000;
+    color: white;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+#KolicinaModal .modal-title{
+    font-size: 13pt;
+}
+.sviRadnici{
+    position: relative;
+    background-color: #fff; 
+    margin: 73px 25px 35px 275px;
+    padding: 15px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 5px 5px 0px;
+}
+.sviRadnici a{
+    display: inline-flex; 
+    margin: 7px; /*
+    color: #fff;*/ 
+    border: 1px solid gray; 
+    border-radius: 5px; 
+    width: 185px;
+    padding: 6px 0 6px 35px;
+    text-align: center;
+}
+.sviRadnici a:hover{
+    color:red;
+}
