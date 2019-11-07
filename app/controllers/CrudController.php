@@ -169,7 +169,7 @@ class CrudController extends \BaseController {
 
 			$kupci = DB::table('kupci')->where('aktivan', 1)->get();
 			$vrsta_prodaje = vrsta_prodaje::all();
-			//$dugovanje = [0];
+			$izracunata_isplata = [0];
 			$uplate = [0];
 			$zbir_nacin = [0];
 			$ispaceni_dobavljaci = dobavljaci_isplata::sum('iznos');

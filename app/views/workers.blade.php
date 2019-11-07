@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
     <style type="text/css">
       .row {
-        margin-right: -20%;
-        margin-left: -20%;/*
+        margin-right: -15%;
+        margin-left: -15%;/*
         margin-top: 30px;*/
       }
     </style>

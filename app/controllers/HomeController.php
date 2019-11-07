@@ -55,6 +55,10 @@ class HomeController extends BaseController {
 				}
 			}
 
+			if (empty($suma)) {
+				$suma = 0;
+			}
+
 			for ($i=0; $i < count($vrsta_prodaje); $i++) { 
 				$zbir1 = 0;
 				foreach (Buyers::all() as $key => $value) {					

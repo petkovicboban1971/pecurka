@@ -123,11 +123,13 @@
                         <tr>
                             <td style="padding-left: 7px; border-top: 2px solid #000;">{{ AdminOptions::lang(200, Session::get('jezik.AdminOptions::server()')) }}:</td>  
                             <?php 
-                                $suma1 = kolicinedobavljaca::procenat_iznos($dobavljac->id);
-                                ($suma1 == 0) ? $suma1=1 : $suma1;
-                                foreach ($dobavljaci as $dobavljac) {                    
-                                    $pom1 = kolicinedobavljaca::procenat_iznos1($dobavljac->id);
-                                    echo "<td style='font-weight:bold; border-top: 2px solid #000;'>".number_format($pom1,2,',','.')." ".Firma::valuta()." (".number_format(($pom1/$suma1)*100,2,',','.') ." %)</td>";
+                                if (!empty($dobavljac)) {
+                                    $suma1 = kolicinedobavljaca::procenat_iznos($dobavljac->id);
+                                    ($suma1 == 0) ? $suma1=1 : $suma1;
+                                    foreach ($dobavljaci as $dobavljac) {                    
+                                        $pom1 = kolicinedobavljaca::procenat_iznos1($dobavljac->id);
+                                        echo "<td style='font-weight:bold; border-top: 2px solid #000;'>".number_format($pom1,2,',','.')." ".Firma::valuta()." (".number_format(($pom1/$suma1)*100,2,',','.') ." %)</td>";
+                                    }                            
                                 }
                             ?>
                         </tr>

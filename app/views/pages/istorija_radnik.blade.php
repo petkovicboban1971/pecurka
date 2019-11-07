@@ -42,7 +42,7 @@ $izbor = 2; $pom = 1; $opcija = [0]; ?>
 		<tbody>
 			@foreach($period as $period1)
 				<tr>
-					<td>{{ date_format(date_create($period1->created_at), "d.m.Y. H:i:s") }}</td>
+					<td>{{ date_format(date_create($period1->created_at), "d.m.Y.") }}</td>
 					<td>{{ proizvodi::find($period1->proizvod)->naziv_proizvoda }}<br> ({{ number_format(cene_datumi::cena_proizvoda($period1->proizvod, $period1->created_at),2,",",".") }} {{ Firma::valuta() }})</td>
 					<td>
 						@if($period1->pakovanje2 == 0)

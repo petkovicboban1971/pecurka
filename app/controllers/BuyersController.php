@@ -98,6 +98,7 @@ class BuyersController extends \BaseController {
 
 	public function uplate_kupaca(){
 
+		$svi_reversi = [0];
 		$reversi = [];
 		$reversi_zbir = [];
 		$naplaceni_reversi = [];
@@ -107,14 +108,16 @@ class BuyersController extends \BaseController {
 			$svi_reversi = razduzenjeRadnika::where('kupac', $kupac->id)
 											->where('nacin', 3)
 											->get();
-			foreach ($svi_reversi as $revers) {
-				$suma_revers = proizvodi::kolicina_pakovanje($revers->kolicina, $revers->pakovanje, $revers->proizvod, $suma_revers, $revers->created_at);
-			}
-			if($suma_revers != 0){
-				$reversi[$k1] = $kupac->id;
-				$reversi_zbir[$k1] = $suma_revers;
-				$naplaceni_reversi[$k1] = kupci_uplata::where('kupac_id', $kupac->id)->sum('iznos');
-				//echo $suma_revers."<br>";
+
+			if (!empty($svi_reversi)) {
+				foreach ($svi_reversi as $revers) {
+					$suma_revers = proizvodi::kolicina_pakovanje($revers->kolicina, $revers->pakovanje, $revers->proizvod, $suma_revers, $revers->created_at);
+				}
+				if($suma_revers != 0){
+					$reversi[$k1] = $kupac->id;
+					$reversi_zbir[$k1] = $suma_revers;
+					$naplaceni_reversi[$k1] = kupci_uplata::where('kupac_id', $kupac->id)->sum('iznos');
+				}			
 			}
 		}
 		
