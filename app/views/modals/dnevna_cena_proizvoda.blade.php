@@ -1,4 +1,4 @@
-
+<?php Session::put('blink', 1) ?>
 	<div class="modal-dialog modal-sm">
 	   	<div class="modal-content">
 	        <div class="modal-header">

@@ -463,12 +463,16 @@
             </li>
             <!-- Prodaja -->
             <li>
-                <div class="blink_me">
-                    <a href="">
-                        <i class="fa fa-money"></i>
-                        <strong>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</strong>
-                        <small>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</small>
-                    </a>
+                @if(Session::get('blink') == 1)
+                    <div>
+                @else
+                    <div class="blink_me">
+                @endif
+                        <a href="">
+                            <i class="fa fa-money" ></i>
+                            <strong>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</strong>
+                            <small>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</small>
+                        </a>
                 </div>
                 <ul>
                   	<!-- 
@@ -494,7 +498,11 @@
                         </a>
                     </li> -->
                     <li>
-                        <div class="blink_me">
+                        @if(Session::get('blink') == 1)
+                            <div>
+                        @else
+                            <div class="blink_me">
+                        @endif
                             <a href="#" class="dnevna_cena_proizvoda">
                                 <i class="fa fa-money"></i>
                                 <b>{{ AdminOptions::lang(254, Session::get('jezik.AdminOptions::server()')) }}</b>

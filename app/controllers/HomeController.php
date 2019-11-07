@@ -10,6 +10,7 @@ class HomeController extends BaseController {
         Session::forget('jezik.AdminOptions::server()');
         Session::forget('log_sesija.AdminOptions::server()');
         Session::forget('brojac');
+        Session::forget('blink');
         if ($id == 1) {
 	        Session::put('dash', 1);
 	    }
