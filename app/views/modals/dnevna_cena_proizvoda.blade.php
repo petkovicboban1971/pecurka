@@ -1,4 +1,4 @@
-<?php Session::put('blink', 1) ?>
+
 	<div class="modal-dialog modal-sm">
 	   	<div class="modal-content">
 	        <div class="modal-header">
@@ -19,7 +19,7 @@
 	        		</select><br><br>
 		        	<input type="text" id="kolicina" style="float: right;" name="kolicina" size="9" placeholder="{{ AdminOptions::lang(253, Session::get('jezik.AdminOptions::server()')) }}" required><br><br><!-- 
 	        		<textarea style="margin-left: 15px;" rows="4" cols="22" name="opis" form="myForm"> {{ AdminOptions::lang(7, Session::get('jezik.AdminOptions::server()')) }}</textarea> -->
-		        </div>
+		        </div> 
 		        <div class="modal-footer">
 		        	<button type="submit" class="btn btn-success btn1">{{ AdminOptions::lang(47, Session::get('jezik.AdminOptions::server()')) }}</button>
 		        </div>

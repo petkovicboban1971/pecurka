@@ -19,7 +19,7 @@
 	      	<div class="modal-dialog">
 	        	<div class="modal-content">
 	          		<div class="modal-header">
-	            		<h4 class="modal-title"><center><h2><b>Izaberite jezik / Choise a language</center></h4>
+	            		<h4 class="modal-title"><center><h2><b>Izaberite jezik / Select a language</center></h4>
 	          		</div>
 		          	<div class="modal-body">
 		          		<form action="/pre-Welcome"  method="post">

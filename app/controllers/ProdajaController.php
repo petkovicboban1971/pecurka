@@ -173,19 +173,14 @@ class ProdajaController extends \BaseController {
     	$postojeci_datum = cene_datumi::where('created_at', date('Y-m-d'))->pluck('id');
     	$postojeci_proizvod = cene_datumi::where('proizvod_id', Input::get('proizvod'))->pluck('id');
 
-    	/*if (!empty($postojeci_datum) && !empty($postojeci_proizvod)) {
-    		$data = cene_datumi::find($postojeci_proizvod)->first();
-    		$data->cene = Input::get('kolicina');
-	    	$data->proizvod_id =  Input::get('proizvod');
-	    	$data->update();
-    	}
-    	else{*/
-	    	$dnevna_cena_proizvoda = new cene_datumi();
-	    	$dnevna_cena_proizvoda->cene = Input::get('kolicina');
-	    	$dnevna_cena_proizvoda->proizvod_id = Input::get('proizvod');
-	    	$dnevna_cena_proizvoda->created_at = date('Y-m-d');
-	    	$dnevna_cena_proizvoda->save(); 
-	    /*}*/
+    	$dnevna_cena_proizvoda = new cene_datumi();
+    	$dnevna_cena_proizvoda->cene = Input::get('kolicina');
+    	$dnevna_cena_proizvoda->proizvod_id = Input::get('proizvod');
+    	$dnevna_cena_proizvoda->created_at = date('Y-m-d');
+    	$dnevna_cena_proizvoda->save(); 
+
+    	Session::put('blink', 1);
+    
 
     	Session::flash('msg', AdminOptions::lang(261, Session::get('jezik.AdminOptions::server()')));
 		return Redirect::back();
