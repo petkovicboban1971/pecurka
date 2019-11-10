@@ -12,7 +12,7 @@
     <div class="grafikon">    
         <ul class="chart" style="background-color: #999999;">
             <li>
-                <a href="{{ $link1 }}" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;" >{{ AdminOptions::lang(164, Session::get('jezik.AdminOptions::server()')) }}
+                <a href="{{ $link1 }}" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;" >{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
                 </a>&nbsp;&nbsp;
                 <a href="{{ $link2 }}" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;">{{ AdminOptions::lang(165, Session::get('jezik.AdminOptions::server()')) }}
                 </a>

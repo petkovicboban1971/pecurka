@@ -70,15 +70,20 @@ body {
   margin: -48px 5px -50px -45px;
   background: #FFF;
   /*height: 100%;*/
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  box-shadow: 8px 8px #b3b3b3;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
+  -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   width: 200px;
   position: fixed;
 }
 .mcd-menu li {
   position: relative;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
   /*float:left;*/
 }
 .mcd-menu li a {
@@ -86,7 +91,9 @@ body {
   text-decoration: none;
   padding: 18px 0px 45px 20px;
   color: #777;
-  box-shadow: 4px 4px #b3b3b3;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
+  -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   /*text-align: center;
   border-right: 3px solid #E7E7E7;
   border-left: 3px solid #E7E7E7;*/
@@ -96,6 +103,10 @@ body {
   height: 52px;
   position: relative;
   border-bottom: 1px solid #EEE;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;/*
+  border-bottom-left-radius: 10px;*/
   /* == */
 }
 .mcd-menu li a i {
@@ -170,9 +181,10 @@ body {
   /*border-top: 4px solid #e67e22;
   border-bottom: 4px solid #e67e22;
   margin-top: -4px;*/
-  box-shadow: 0 0 5px #DDD;
-  -moz-box-shadow: 0 0 5px #DDD;
-  -webkit-box-shadow: 0 0 5px #DDD;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  
+  -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
   /* == */
   border-left: 4px solid #e67e22;

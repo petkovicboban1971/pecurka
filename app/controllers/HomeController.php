@@ -23,6 +23,7 @@ class HomeController extends BaseController {
 	}
 
 	public function welcome(){
+		$_GET['menu1'] = 1;
 		$danas = date('Y-m-d');
 		if(isset($_GET['menu1']) && $_GET['menu1'] == 1){
 			$kupci = Buyers::where('aktivan', 1)->get();
@@ -210,9 +211,25 @@ class HomeController extends BaseController {
 		}
 
 		if ($_GET['id']=1) {
-			
+			$data1 = [];
+			$veza = [];
 			$data = proizvodi::where('aktivan', 1)->orderBy('grupa_proizvoda', 'ASC')->get();
-			return View::make('pages.home', array('data1' => $data, 'pom' => 2));
+			foreach ($data as $key => $data2) {
+				if($data2->pakovanje == 0){
+					$veza[$key] = veza::where('proizvod', $data2->id)->sum('kolicina');
+					$data1[$key] = ABS($data2->kolicina_proizvoda - $veza[$key]);
+				}
+				else{
+					$veza[$key] = veza::where('proizvod', $data2->id)->sum('pakovanje');
+					$data1[$key] = ABS($data2->pakovanje - $veza[$key]);
+
+				}
+			}
+			return View::make('pages.home', array(
+				'data1' => $data,  
+				'razlika' => $data1,
+				'pom' => 2
+			));
 		}
 
 	}

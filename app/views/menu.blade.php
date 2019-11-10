@@ -42,12 +42,12 @@
     <div class="grafikon">    
         <ul class="chart">
             <li>
-                <a href="/glavniMagacin" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;" >{{ AdminOptions::lang(164, Session::get('jezik.AdminOptions::server()')) }}
+                <a href="/glavniMagacin" class="btn btn-default" style="width: 150px; font-size: 11pt; " >{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
                 </a>&nbsp;&nbsp;
-                <a href="/stanjeMagacina?magacin=1&choise=-1" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;">{{ AdminOptions::lang(165, Session::get('jezik.AdminOptions::server()')) }}
+                <a href="/stanjeMagacina?magacin=1&choise=-1" class="btn btn-default" style="width: 150px; font-size: 11pt; ">{{ AdminOptions::lang(165, Session::get('jezik.AdminOptions::server()')) }}
                 </a>
                 &nbsp;&nbsp;
-                <a href="/stanjeMagacina?magacin=2&choise=-2" class="btn btn-default" style="width: 150px; font-size: 11pt; box-shadow: 2px 2px #b3b3b3;">{{ AdminOptions::lang(171, Session::get('jezik.AdminOptions::server()')) }}
+                <a href="/stanjeMagacina?magacin=2&choise=-2" class="btn btn-default" style="width: 150px; font-size: 11pt; ">{{ AdminOptions::lang(171, Session::get('jezik.AdminOptions::server()')) }}
                 </a>
             </li><br>                          
             <!-- <li class="current" title="Label 1"><span class="bar" data-number="38000"></span><span class="number">38,000</span></li> -->
@@ -465,17 +465,17 @@
             </li>
             <!-- Prodaja -->
             <li>
-                @if(Session::get('blink') == 1)
-                    <div>
-                @else
-                    <div class="blink_me">
-                @endif
-                        <a href="">
-                            <i class="fa fa-money" ></i>
-                            <strong>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</strong>
-                            <small>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</small>
-                        </a>
-                </div>
+                <a href="">
+                    @if(Session::get('blink') == 1)
+                        <div>
+                    @else
+                        <div class="blink_me">
+                    @endif
+                        <i class="fa fa-money" ></i>
+                        <strong>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</strong>
+                        <small>{{ AdminOptions::lang(29, Session::get('jezik.AdminOptions::server()')) }}</small>
+                    </div>
+                </a>
                 <ul>
                   	<!-- 
                     <div id="result"></div> -->
@@ -500,16 +500,16 @@
                         </a>
                     </li> -->
                     <li>
-                        @if(Session::get('blink') == 1)
-                            <div>
-                        @else
-                            <div class="blink_me">
-                        @endif
-                            <a href="#" class="dnevna_cena_proizvoda">
+                        <a href="#" class="dnevna_cena_proizvoda">
+                            @if(Session::get('blink') == 1)
+                                <div>
+                            @else
+                                <div class="blink_me">
+                            @endif
                                 <i class="fa fa-money"></i>
                                 <b>{{ AdminOptions::lang(254, Session::get('jezik.AdminOptions::server()')) }}</b>
-                            </a>
-                        </div>    
+                            </div>    
+                        </a>
                         <ul>
                             <li>
                                 <a href="#" class="pregled_dnevnih_cena">

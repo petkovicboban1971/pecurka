@@ -1,6 +1,6 @@
 .chart{
 	zoom:1;
-	width:70%;
+	width:69%;
 	position: absolute; 
 	left:240px;
 	padding-right: 15px
@@ -89,8 +89,19 @@
 	width: 82%;
 	padding: 15px 110px 15px 8px;
 	margin: 15px 15px 15px -20px;
-	box-shadow: 8px 8px #080f11;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  
+  -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .grafikon .chart li .bar:hover{
 	background-color: #f2f2f2;
+}
+.grafikon a.btn{
+	border-radius: 7px !important;
+
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  
+  -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }

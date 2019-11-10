@@ -13,7 +13,7 @@ class ZaduzenjeController extends \BaseController{
 									   ->orderBy('prezime', 'ASC')
 									   ->orderBy('ime', 'ASC')
 									   ->get();
-		$prethodnoZaduzeni = DB::table('veza')->get();
+		$prethodnoZaduzeni = veza::all();
 		return View::make('pages.zaduzeniRadnik2', array(
 			'opcija' => 1, 
 			'text' => AdminOptions::lang(115, Session::get('jezik.AdminOptions::server()')), 
@@ -25,12 +25,12 @@ class ZaduzenjeController extends \BaseController{
 
 	public function zaduzenjeRadnika3($id){
 
-		$provera1 = !empty(DB::table('upisaniproizvod')->max('id')) ? DB::table('upisaniproizvod')->max('id') : '1';
+		$provera1 = !empty(upisaniproizvod::max('id')) ? upisaniproizvod::max('id') : '1';
 
-		if(!empty(DB::table('veza')->where('radnik', $id)->first())){
+		if(!empty(veza::where('radnik', $id)->first())){
 				
-			$pom = DB::table('veza')->where('radnik', $id)->first()->id;
-			$pomm = DB::table('veza')->where('radnik', $id)->get();
+			$pom = veza::where('radnik', $id)->first()->id;
+			$pomm = veza::where('radnik', $id)->get();
 			foreach ($pomm as $value1) {
 				
 				$kolicinaIzMagacina = veza::find($value1->id);
@@ -52,14 +52,14 @@ class ZaduzenjeController extends \BaseController{
 				$kolicinaProizvoda->update();
 			}
 			
-			$pom2 = !empty(DB::table('upisaniproizvod')->where('radnik', $id)->first()->id) ?  DB::table('upisaniproizvod')->where('radnik', $id)->first()->id : $id;
+			$pom2 = !empty(upisaniproizvod::where('radnik', $id)->first()->id) ? upisaniproizvod::where('radnik', $id)->first()->id : $id;
 
 			$upisRadnika = new upisaniproizvod;
 			$upisRadnika->radnik = $id;
 			$upisRadnika->save();
-			$provera1 = DB::table('upisaniproizvod')->max('id');
+			$provera1 = upisaniproizvod::max('id');
 
-			foreach (DB::table('veza')->where('radnik', $id)->get() as $value) {
+			foreach (veza::where('radnik', $id)->get() as $value) {
 				$upisRadnika = new upisaniproizvod;
 				$upisRadnika->proizvod = $value->proizvod;
 				if ($value->pakovanje == 0){
@@ -85,7 +85,7 @@ class ZaduzenjeController extends \BaseController{
 				upisaniproizvod::find($value->id)->delete();
 			}
 
-			foreach(DB::table('veza')->where('radnik', $id)->get() as $veza){
+			foreach(veza::where('radnik', $id)->get() as $veza){
 				veza::find($veza->id)->delete();
 			}
 
@@ -116,7 +116,7 @@ class ZaduzenjeController extends \BaseController{
 	public function zaduzenjeRadnika4(){
 
 		Session::put('idProizvoda', $_POST['Product']);
-		$pomRadnik = DB::table('upisaniproizvod')->where('radnik', $_POST['Id'])->first();
+		$pomRadnik = upisaniproizvod::where('radnik', $_POST['Id'])->first();
 
 		$upisProizvoda = new upisaniproizvod;
 		$upisProizvoda->proizvod = Session::get('idProizvoda');
@@ -124,7 +124,7 @@ class ZaduzenjeController extends \BaseController{
 		$upisProizvoda->parent_id = $pomRadnik->id;
 		$upisProizvoda->save();
 
-		$pom1 = DB::table('upisaniproizvod')->get();
+		$pom1 = upisaniproizvod::all();
 
 		foreach ($pom1 as $key => $value1) {
 			for ($i=0; $i<count($value1)-1; $i++) {

@@ -179,8 +179,7 @@ class ProdajaController extends \BaseController {
     	$dnevna_cena_proizvoda->created_at = date('Y-m-d');
     	$dnevna_cena_proizvoda->save(); 
 
-    	Session::put('blink', 1);
-    
+    	Session::put('blink', 1);    
 
     	Session::flash('msg', AdminOptions::lang(261, Session::get('jezik.AdminOptions::server()')));
 		return Redirect::back();

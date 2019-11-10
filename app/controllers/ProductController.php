@@ -151,9 +151,25 @@ class ProductController extends \BaseController {
 
 
 	public function glavniMagacin(){
-
+		$data1 = [];
+		$veza = [];
 		$data = proizvodi::where('aktivan', 1)->orderBy('grupa_proizvoda', 'ASC')->get();
-		return View::make('welcome', array('data1' => $data));
+		foreach ($data as $key => $data2) {
+			if($data2->pakovanje == 0){
+				$veza[$key] = veza::where('proizvod', $data2->id)->sum('kolicina');
+				$data1[$key] = ABS($data2->kolicina_proizvoda - $veza[$key]);
+			}
+			else{
+				$veza[$key] = veza::where('proizvod', $data2->id)->sum('pakovanje');
+				$data1[$key] = ABS($data2->pakovanje - $veza[$key]);
+
+			}
+		}
+		//var_dump($data1);die();
+		return View::make('welcome', array(
+			'data1' => $data, 
+			'razlika' => $data1
+		));
 	}
 
 	public function tabela(){
