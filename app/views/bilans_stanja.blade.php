@@ -6,6 +6,7 @@
     .navbar1 {
         width: 100%;
         overflow: auto;
+        background-color: #fff;
     }
     .navbar1 tr, th, td{
         padding: 0px 5px !important;
@@ -48,8 +49,10 @@
             <td></td>
             <?php  
                 $pom2 = 0;
-                for($i=0; $i < count($vrsta_prodaje); $i++){
-                    $pom2 = $pom2 + $zbir_nacin[$i];    
+                if ($zbir_nacin != [0]) {
+                    for($i=0; $i < count($vrsta_prodaje); $i++){
+                        $pom2 = $pom2 + $zbir_nacin[$i];    
+                    }
                 }
                 $pom2 = $pom2 - dobavljaci_isplata::where('nacin', 1)->sum('iznos');
             ?>
@@ -81,23 +84,28 @@
             <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(242, Session::get('jezik.AdminOptions::server()')) }}</td>
             <td>{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
             <td>{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td>
-        </tr>         
-        @foreach(Buyers::all() as $b1 => $naziv)
+        </tr>                 
+        @foreach(Buyers::where('aktivan', 1)->get() as $b1 => $naziv)
             <tr>
                 <td>{{ $naziv->naziv }}</td>  
                 <?php $pom1 = 0; ?>                         
                 @for($i=1; $i < count($vrsta_prodaje); $i++)
                     <td style="border-left: 1px solid #000;">
-                        {{ number_format($uplata_nacin[$b1][$i],2,",",".") }} 
+                        <?php 
+                            $pom_uplata = isset($uplata_nacin[$b1][$i]) ? $uplata_nacin[$b1][$i] : 0;
+                        ?>
+                        {{ number_format($pom_uplata,2,",",".") }} 
                         {{ Firma::valuta() }}
                     </td>
                     <?php  
-                        $pom1 = $pom1 + $uplata_nacin[$b1][1];
+                        $pom_uplata = isset($uplata_nacin[$b1][1]) ? $uplata_nacin[$b1][1] : 0;
+                        $pom1 = $pom1 + $pom_uplata;
                     ?>
                 @endfor
                 @for($nacin=1; $nacin < count($vrsta_prodaje); $nacin++)
+                    <?php $pom_dugovanje = isset($dugovanje[$b1][$nacin]) ? $dugovanje[$b1][$nacin] : 0; ?>
                     <td style="border-left: 1px solid #000;">
-                        {{ number_format($dugovanje[$b1][$nacin],2,",",".") }} {{ Firma::valuta() }}
+                        {{ number_format($pom_dugovanje,2,",",".") }} {{ Firma::valuta() }}
                     </td>                            
                 @endfor
                 @for($nacin=0; $nacin < count($vrsta_prodaje); $nacin++)
@@ -119,24 +127,28 @@
                 $pom0 = 0; 
             ?>
             @for($i=0; $i < count($vrsta_prodaje); $i++)
+                <?php $pom_zbir = $zbir_nacin != [0] ? $zbir_nacin[$i] : 0; ?>
                 @if($i == 0)
                     <td style="border-left: 1px solid blue;">
-                        {{ number_format($zbir_nacin[$i]-DB::table('dobavljaci_isplata')->sum('iznos'),2,",",".") }} 
+                        {{ number_format($pom_zbir-dobavljaci_isplata::sum('iznos'),2,",",".") }} 
                         {{ Firma::valuta() }}
                     </td>
                 @else
                     <td style="border-left: 1px solid blue;">
-                        {{ number_format($zbir_nacin[$i],2,",",".") }} 
+                        {{ number_format($pom_zbir,2,",",".") }} 
                         {{ Firma::valuta() }}
                     </td>
                 @endif
-                <?php $pom0 = $pom0 + $zbir_nacin[$i];?>
+                <?php 
+                    $pom_zbir = $zbir_nacin != [0] ? $zbir_nacin[$i] : 0;
+                    $pom0 = $pom0 + $pom_zbir;
+                ?>
             @endfor
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
+            <td style="background-color: #fff;"><br /></td>
         </tr>
         <tr>
             <th style="font-weight: bold;">
@@ -180,7 +192,7 @@
                 <td></td> -->
             </tr>   
         </tr>
-        @foreach(dobavljaci::all() as $key => $dobavljac)
+        @foreach(dobavljaci::where('aktivan', 1)->get() as $key => $dobavljac)
             <tr>
                 <td>{{ $dobavljac->naziv_dobavljaca }}</td>
                 <td style="border-left: 1px solid #000; border-right: 1px solid #000;">

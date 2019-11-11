@@ -1,13 +1,12 @@
 body {
-   background:  #fdfdfa ; /* Old browsers */
+    background-color: #fff9e6;
+    /* Old browsers */
     /*background: url('../table/assets/img/bg.jpg');*/
-
-
-	overflow-x:hidden;
+    overflow-x:hidden;
 }
 
 .tabela1{
- color: red !important; 
+    color: red !important; 
 }
 
 .clearfix:before,
@@ -78,6 +77,11 @@ body {
   -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   width: 200px;
   position: fixed;
+}
+.mcd-menu ul{
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
 .mcd-menu li {
   position: relative;
@@ -340,6 +344,9 @@ body {
   text-align: left;
   border: 0;
   border-bottom: 1px solid #EEE;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 
   /* == */
   height: auto;

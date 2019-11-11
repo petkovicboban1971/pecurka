@@ -3,8 +3,8 @@ class Admin extends Controller{
 
     function admin_login_store() {
 
-        $username=Input::get('username');
-        $password=Input::get('password');
+        $username=$_POST['username'];
+        $password=$_POST['password'];
         $username=addslashes($username);
         $password=addslashes($password);
     //    $password=md5($password);
@@ -37,11 +37,10 @@ class Admin extends Controller{
             }
 
             if ($rola == 10){
-                return Redirect::to(AdminOptions::base_url().'admin-welcome');
+                return Redirect::to('/admin-welcome');
             }
             
-            else {   
-                
+            else {                   
                 echo AdminOptions::lang(117, Session::get('jezik.AdminOptions::server()'));
             }         
 

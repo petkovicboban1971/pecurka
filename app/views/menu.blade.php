@@ -87,18 +87,18 @@
                         tr:nth-child(odd) {background: #FFF}
                         tr:hover {background: #ffb84d}
                     </style>
-                    <table style="color: #000;">
+                    <table  style="color:#000;">
                         <thead>
                             <tr>
-                                <td style="border-bottom: 1px solid gray;"></td>
+                                <td style="border-bottom: 1px solid gray; text-align: center !important; font-weight: bold;">{{ AdminOptions::lang(203, Session::get('jezik.AdminOptions::server()')) }} \ {{ AdminOptions::lang(22, Session::get('jezik.AdminOptions::server()')) }}</td>
                                 @foreach($dobavljaci as $dobavljac)     
-                                    <td style="border-bottom: 1px solid gray">
+                                    <td style="border-bottom: 1px solid gray; text-align: center !important;">
                                         {{ $dobavljac->naziv_dobavljaca }}
                                     </td> 
                                 @endforeach
                                 @foreach($proizvodi as $proizvod)                    
                                     <tr>
-                                        <td style="padding-left: 7px;">{{ $proizvod->naziv_proizvoda }}             
+                                        <td style="padding-left: 7px; text-align: center !important;">{{ $proizvod->naziv_proizvoda }}             
                                             @foreach($dobavljaci as $dobavljac)
                                                 <?php 
                                                     $zbir = 0;
@@ -110,7 +110,7 @@
                                                     }
                                                     if ($zbir != 0) {
                                                         $procenat = proizvodi::procenat($proizvod->id, $zbir);
-                                                        echo "<div style='font-weight:bold;'>".$zbir." kg (".$procenat." %)</div>";
+                                                        echo "<div style=' text-align: center !important;'>".$zbir." kg (".$procenat." %)</div>";
                                                         echo "</td>";
                                                     }
                                                 ?>
@@ -121,14 +121,14 @@
                             </tr>                          
                         </thead>
                         <tr>
-                            <td style="padding-left: 7px; border-top: 2px solid #000;">{{ AdminOptions::lang(200, Session::get('jezik.AdminOptions::server()')) }}:</td>  
+                            <td style="padding-left: 7px; border-top: 2px solid #000; font-weight: bold; text-align: center !important;">{{ AdminOptions::lang(200, Session::get('jezik.AdminOptions::server()')) }}:</td>  
                             <?php 
                                 if (!empty($dobavljac)) {
                                     $suma1 = kolicinedobavljaca::procenat_iznos($dobavljac->id);
                                     ($suma1 == 0) ? $suma1=1 : $suma1;
                                     foreach ($dobavljaci as $dobavljac) {                    
                                         $pom1 = kolicinedobavljaca::procenat_iznos1($dobavljac->id);
-                                        echo "<td style='font-weight:bold; border-top: 2px solid #000;'>".number_format($pom1,2,',','.')." ".Firma::valuta()." (".number_format(($pom1/$suma1)*100,2,',','.') ." %)</td>";
+                                        echo "<td style='font-weight:bold; border-top: 2px solid #000; text-align: center !important;'>".number_format($pom1,2,',','.')." ".Firma::valuta()." (".number_format(($pom1/$suma1)*100,2,',','.') ." %)</td>";
                                     }                            
                                 }
                             ?>
@@ -599,7 +599,7 @@
                     <small>{{ AdminOptions::lang(2, Session::get('jezik.AdminOptions::server()')) }}</small>
                 </a>
             </li>
-            <li style="height:55px;">              
+            <li style="height:55px; border-bottom: 4px solid #808080;">              
                 <strong></strong>
                 <small></small>              
             </li>

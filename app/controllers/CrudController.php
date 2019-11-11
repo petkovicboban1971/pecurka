@@ -139,7 +139,7 @@ class CrudController extends \BaseController {
 
 	public function grafik_dobavljaci(){
 
-		$dobavljaci = dobavljaci::all();
+		$dobavljaci = dobavljaci::where('aktivan', 1)->get();
 		$proizvodi = DB::table('proizvodi')->where('aktivan', 1)
 										   ->where('kolicina_proizvoda', '!=', 0) 
 										   ->orWhere('pakovanje', '!=', 0)

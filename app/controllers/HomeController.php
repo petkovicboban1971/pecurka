@@ -23,14 +23,16 @@ class HomeController extends BaseController {
 	}
 
 	public function welcome(){
-		$_GET['menu1'] = 1;
+		//$_GET['menu1'] = 1;
 		$danas = date('Y-m-d');
 		if(isset($_GET['menu1']) && $_GET['menu1'] == 1){
 			$kupci = Buyers::where('aktivan', 1)->get();
 			$vrsta_prodaje = vrsta_prodaje::all();
-			//$dugovanje = [0];
+			$dugovanje = [];
 			$uplate = [0];
 			$zbir_nacin = [0];
+			$kupac_uplata = [];
+			$kupac1 = [];
 			$ispaceni_dobavljaci = dobavljaci_isplata::sum('iznos');
 			foreach ($kupci as $k1 => $kupac){
 				$dugovanje1 = 0;
@@ -69,55 +71,61 @@ class HomeController extends BaseController {
 			}
 
 			$isplate = [0];
+				$uplata_dobavljaca_nacin = [];
+				$isplate_dobavljacima = [];
 			$svi_dobavljaci = dobavljaci::all();
 
-			foreach($svi_dobavljaci as $k1 => $dobavljac){	
+			if(isset($svi_dobavljaci)){
 
-				//$pom = DB::table('dobavljaci_isplata')->where('dobavljaci_id', $dobavljac->id)->get();
+				foreach($svi_dobavljaci as $k1 => $dobavljac){	
+
+					//$pom = DB::table('dobavljaci_isplata')->where('dobavljaci_id', $dobavljac->id)->get();
+					foreach ($vrsta_prodaje as $k2 => $nacin) {
+						//$k2 == 2 ? $priv = 0 : $priv = $k2;
+						$isplate_dobavljacima[$k1][$k2] = dobavljaci_isplata::where('nacin', $nacin->id)
+														    ->where('dobavljaci_id', $dobavljac->id)
+														    ->sum('iznos');
+					}
+				}
+
 				foreach ($vrsta_prodaje as $k2 => $nacin) {
-					//$k2 == 2 ? $priv = 0 : $priv = $k2;
-					$isplate_dobavljacima[$k1][$k2] = dobavljaci_isplata::where('nacin', $nacin->id)
-													    ->where('dobavljaci_id', $dobavljac->id)
-													    ->sum('iznos');
-				}
-			}
-
-			foreach ($vrsta_prodaje as $k2 => $nacin) {
-				$isplate1 = 0;
-				foreach ($svi_dobavljaci as $k1 => $dobavljac) {
-					$isplate[$k2] = $isplate1 + $isplate_dobavljacima[$k1][$k2];
-					$isplate1 = $isplate[$k2];
-				}
-				
-			}
-
-			$dobavljac = [0];
-
-			foreach (dobavljaci::where('aktivan', 1)->get() as $key => $dobavljaci) {
-				 $dobavljac[$key] = kolicinedobavljaca::uplate_dobavljaca($dobavljaci->id);
-
-			} 
-			
-			$brojac = [0];
-			for ($i=0; $i < count($vrsta_prodaje); $i++) { 
-				$pom = 0;
-				foreach ($svi_dobavljaci as $key => $value) {
+					$isplate1 = 0;
+					foreach ($svi_dobavljaci as $k1 => $dobavljac) {
+						$isplate[$k2] = $isplate1 + $isplate_dobavljacima[$k1][$k2];
+						$isplate1 = $isplate[$k2];
+					}
 					
-	                $brojac[$i] = $pom + $isplate_dobavljacima[$key][$i] - $dobavljac[$key];
-	                $pom = $brojac[$i];	
 				}
-			}
 
-			foreach ($svi_dobavljaci as $k1 => $dobavljac1) {
+				$dobavljac = [0];
+
+				foreach (dobavljaci::where('aktivan', 1)->get() as $key => $dobavljaci) {
+					 $dobavljac[$key] = kolicinedobavljaca::uplate_dobavljaca($dobavljaci->id);
+
+				} 
 				
-				foreach ($vrsta_prodaje as $k2 => $nacin) {
+				$brojac = [0];
+				for ($i=0; $i < count($vrsta_prodaje); $i++) { 
+					$pom = 0;
+					foreach ($svi_dobavljaci as $key => $value) {
+						
+		                $brojac[$i] = $pom + $isplate_dobavljacima[$key][$i] - $dobavljac[$key];
+		                $pom = $brojac[$i];	
+					}
+				}
+
+				foreach ($svi_dobavljaci as $k1 => $dobavljac1) {
 					
-					$uplata_dobavljaca_nacin[$k1][$k2] = dobavljaci_isplata::where('dobavljaci_id', $dobavljac1->id)
-														  ->where('nacin', $nacin->id)
-														  ->sum('iznos');
+					foreach ($vrsta_prodaje as $k2 => $nacin) {
+						
+						$uplata_dobavljaca_nacin[$k1][$k2] = dobavljaci_isplata::where('dobavljaci_id', $dobavljac1->id)
+															  ->where('nacin', $nacin->id)
+															  ->sum('iznos');
+					}
 				}
 			}
 
+//var_dump($uplata_dobavljaca_nacin);die();
 			$ziralna_uplata = kupci_ziralna_uplata::sum('iznos');
 			$otpis_zbir = 0;
 			foreach(otpis::all() as $otpis){
@@ -147,9 +155,13 @@ class HomeController extends BaseController {
 				$zbir_veza = proizvodi::kolicina_pakovanje($veza->kolicina, $veza->pakovanje, $veza->proizvod, $zbir_veza, $veza->created_at);
 			}
 
-			if (empty($kupac_uplata)) {
+			/*if (empty($kupac_uplata)) {
 				Session::flash('err', AdminOptions::lang(251, Session::get('jezik.AdminOptions::server()')) );
 				return Redirect::back();
+			}*/
+
+			if (empty($uplate)) {
+				$uplate = 0;
 			}
 
 			$zaduzenje_svih_radnika = upisaniproizvod::where('created_at', $danas)->where('proizvod', '!=', 0)->get();

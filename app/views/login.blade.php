@@ -24,9 +24,9 @@
 		          	<div class="modal-body">
 		          		<form action="/pre-Welcome"  method="post">
 			          		<center>
-			          			<button type="submit" name="jezik" value="sr" class="btn">SRPSKI</button>
-			          			<button type="submit" name="jezik" value="en" class="btn">ENGLISH</button>
-			          			<button type="submit" name="jezik" value="cr" class="btn">ЋИРИЛИЦА</button>
+			          			<button type="submit" name="jezik" value="sr" class="btn" style="width: 100px;">SRPSKI</button>
+			          			<button type="submit" name="jezik" value="en" class="btn" style="width: 100px;">ENGLISH</button>
+			          			<button type="submit" name="jezik" value="cr" class="btn" style="width: 100px;">ЋИРИЛИЦА</button>
 			          		</center>
 		          		</form>
 		          	</div>
@@ -44,9 +44,9 @@
 		<div class="login-form-wrapper">
 			<div class="login-form-wrapper__box">
 				<div class="form-avatar">
-					<a class="logo" href="https:/www.google.com" title="Bexter Design"><img src="{{ AdminOptions::base_url()}}images\Logo1.png" alt="Bexter Design"></a>
+					<a class="logo" href="https://bexter.rs" title="Bexter Design"><img src="images/Logo1.png" alt="Bexter Design"></a>
 				</div>
-				<form action="{{ AdminOptions::base_url() }}admin-login-store" method="post" class="" autocomplete="off">
+				<form action="/admin-login-store" method="post" class="" autocomplete="off">
 					<?php if (Session::get('jezik.AdminOptions::server()')) {?>
 					<div class="field-group">
 						<input class="login-form__input input_placeholder" placeholder="{{ AdminOptions::lang(41, Session::get('jezik.AdminOptions::server()')) }}" name="username" type="text" value="{{ Input::old('username') ? Input::old('username') : '' }}" >
@@ -54,16 +54,17 @@
 					<div class="field-group">
 						<input class="login-form__input input_placeholder" id="login-pass1" placeholder="{{ AdminOptions::lang(42, Session::get('jezik.AdminOptions::server()')) }}" name="password" type="password" value="{{ Input::old('password') ? Input::old('password') : '' }}">
 					</div>
-						<button type="submit" class="login-form-button admin-login">{{ AdminOptions::lang(43, Session::get('jezik.AdminOptions::server()')) }}</button>
+						<button type="submit" class="login-form-button admin-login">
+							{{ AdminOptions::lang(43, Session::get('jezik.AdminOptions::server()')) }}
+						</button>
 					<?php }
 						else {?>
-						<div class="field-group">
-							<input class="login-form__input input_placeholder" type="text" >
-						</div>
-						<div class="field-group">
-							<input class="login-form__input input_placeholder" type="text" >
-						</div>
-
+							<div class="field-group">
+								<input class="login-form__input input_placeholder" type="text" >
+							</div>
+							<div class="field-group">
+								<input class="login-form__input input_placeholder" type="text" >
+							</div>
 					<?php }
 					?>
 				</form>

@@ -43,6 +43,9 @@
                 foreach($data0 as $data1){
                     $suma = $suma + cene_datumi::cena_proizvoda($data1->proizvod, $data1->created_at) * RazduzenjeRadnika::pakovanjeKolicinaSvi($data1->proizvod, $data1->id, 'razduzenjeRadnika');
                 }
+                if (null == $suma) {
+                    $suma = 0;
+                }
                 return $suma;
             }
         }

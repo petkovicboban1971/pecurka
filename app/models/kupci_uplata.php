@@ -11,6 +11,10 @@
 	    	$data = DB::table('kupci_uplata')->where('kupac_id', $id1)
 	    									 ->where('nacin', $id2)
 	    									 ->sum('iznos');
+
+	    	if (null == $data) {
+	    		$data = 0;
+	    	}
 	    	return $data;
 	    }
   	}
