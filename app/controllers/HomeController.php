@@ -52,7 +52,7 @@ class HomeController extends BaseController {
 						$uplate[$k1] = $uplate1 + $kupac_uplata[$k1][$k2];
 						$uplate1 = $uplate[$k1];
 					}
-					$kupac1[$k1][$k2] = RazduzenjeRadnika::razduzenja($kupac->id, $nacin->id, $kupac->created_at);
+					$kupac1[$k1][$k2] = razduzenjeRadnika::razduzenja($kupac->id, $nacin->id, $kupac->created_at);
 					$dugovanje[$k1][$k2] = $kupac1[$k1][$k2];
 					$suma[$k1][$k2] = $dugovanje[$k1][$k2] - $kupac_uplata[$k1][$k2];
 				}
@@ -170,19 +170,12 @@ class HomeController extends BaseController {
 				$suma_zaduzenja = proizvodi::kolicina_pakovanje($value->kolicina2, $value->pakovanje2, $value->proizvod, $suma_zaduzenja, $value->created_at);
 			}
 
-			$razduzenje_radnika = razduzenjeradnika::where('created_at', $danas)->get();
+			$razduzenje_radnika = razduzenjeRadnika::where('created_at', $danas)->get();
 			//var_dump($razduzenje_radnika);die();
 			$suma_razduzenja = 0;
 			foreach ($razduzenje_radnika as $value) {				
 				$suma_razduzenja = proizvodi::kolicina_pakovanje($value->kolicina, $value->pakovanje, $value->proizvod, $suma_razduzenja, $value->created_at);
 			}
-			/*echo $suma_zaduzenja."<br>";
-			echo $suma_razduzenja;die();*/
-
-
-
-
-
 
 			return View::make('welcome', array(
 				'uplata_nacin' => $kupac_uplata,
@@ -243,6 +236,38 @@ class HomeController extends BaseController {
 				'pom' => 2
 			));
 		}
+
+	}
+
+	public function podaci_firma(){
+
+		if(Firma::first() == null){
+			$firma = new Firma();
+			$firma->naziv = $_POST['ime_firme'];
+			$firma->adresa = $_POST['adresa'];
+			$firma->telefon = $_POST['telefon'];
+			$firma->web_sajt = '/home';
+			$firma->valuta = 'RSD';
+			$firma->timestamps = false;
+			$firma->save();
+		}
+		else{
+			$firma = Firma::all()->first();
+			//var_dump($firma);die();
+			if($_POST['ime_firme']){
+				$firma->naziv = $_POST['ime_firme'];
+			}
+			if($_POST['adresa']){
+				$firma->adresa = $_POST['adresa'];
+			}
+			if($_POST['telefon']){
+				$firma->telefon = $_POST['telefon'];
+			}
+			$firma->timestamps = false;
+			$firma->update();
+		}
+		Session::flash('msg', AdminOptions::lang(266, Session::get("jezik.AdminOptions::server()")));
+		return Redirect::back();
 
 	}
 

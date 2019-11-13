@@ -31,7 +31,7 @@
         <div class="form-group row">
           <label class="col-sm-4 control-label">{{ AdminOptions::lang(219, Session::get('jezik.AdminOptions::server()')) }}</label>
           <div class="col-sm-8">
-            <input type="text" name="proizvodna_cena" class="form-control input-sm" Placeholder="{{ $data->proizvodna_cena }}" autocomplete="off">
+            <input type="number" step="0.01" min="0" lang="en" name="proizvodna_cena" class="form-control input-sm" Placeholder="{{ $data->proizvodna_cena }}" autocomplete="off">
           </div>
         </div>
         <!-- <div class="form-group row">

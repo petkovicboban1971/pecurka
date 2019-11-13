@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ AdminOptions::base_url()}}css/alertify.core.css">
     <link rel="stylesheet" type="text/css" href="{{ AdminOptions::base_url()}}css/admin.css">
@@ -43,7 +43,7 @@
         }
     </style>
 </head>
-<body>  
+<body> 
     @if(null === Session::get('brojac'))
     <?php Session::put('brojac', 1) ?>
         <div class="modal fade" id="overlay">

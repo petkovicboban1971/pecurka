@@ -32,20 +32,20 @@
       <div class="form-group row">
         <label class="col-sm-4 control-label">{{ AdminOptions::lang(18, Session::get('jezik.AdminOptions::server()')) }}</label>
         <div class="col-sm-8" >
-          <input type="text" name="nabavna_cena" class="form-control input-sm cheque-amt" Placeholder="{{ $data->ulazna_stavka_nabavna_cena }}" autocomplete="off">
+          <input type="number" step="0.01" min="0" lang="en" name="nabavna_cena" class="form-control input-sm cheque-amt" Placeholder="{{ $data->ulazna_stavka_nabavna_cena }}" autocomplete="off">
         </div>
       </div>
       
       <div class="form-group row">
         <label class="col-sm-4 control-label">{{ AdminOptions::lang(19, Session::get('jezik.AdminOptions::server()')) }}</label>
         <div class="col-sm-8">
-          <input type="text" name="porez" class="form-control input-sm" Placeholder="{{ $data->ulazna_stavka_porez }}" autocomplete="off">
+          <input type="number" step="0.01" min="0" lang="en" name="porez" class="form-control input-sm" Placeholder="{{ $data->ulazna_stavka_porez }}" autocomplete="off">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-4 control-label">{{ AdminOptions::lang(20, Session::get('jezik.AdminOptions::server()')) }}</label>
         <div class="col-sm-8">
-          <input type="text" name="marza" class="form-control input-sm" Placeholder="{{ $data->ulazna_stavka_zaracunata_marza }}" autocomplete="off">
+          <input type="number" step="0.01" min="0" lang="en" name="marza" class="form-control input-sm" Placeholder="{{ $data->ulazna_stavka_zaracunata_marza }}" autocomplete="off">
         </div>
       </div>
       <div class="form-group row">

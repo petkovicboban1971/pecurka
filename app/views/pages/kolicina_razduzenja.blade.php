@@ -59,7 +59,7 @@ $izbor = 2; $pom = 1; $opcija = [0]; ?>
 				</select>
 			</div>
 			<div class="col-8 col-md-4">
-				<input type="text" id="gender1" class="kolicina" name="novaKolicina"  placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
+				<input type="number" step="0.01" min="0" lang="en" id="gender1" class="kolicina" name="novaKolicina"  placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
 				<input type="hidden" name="izbor" value="{{ $novi->id }}">
 				<input type="hidden" name="proizvod" value="{{ $novi->proizvod }}">
 				<input type="hidden" name="radnik" value="{{ $novi->radnik_id }}">

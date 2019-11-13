@@ -8,9 +8,9 @@
       <div class="d-flex p-3 bg-success text-black">
         <tbody>
           <tr>&nbsp;
-            <div class="p-2 "><td><input type="text" name="kolicina" size="6" placeholder="kolicina"></td></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="p-2 "><td><input type="text" name="marza" size="6" placeholder="marza"></td></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="p-2 "><td><input type="text" name="zarRad" size="6" placeholder="zarada radnika"></td></div>            
+            <div class="p-2 "><td><input type="number" step="0.01" min="0" lang="en" name="kolicina" size="6" placeholder="kolicina"></td></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="p-2 "><td><input type="number" step="0.01" min="0" lang="en" name="marza" size="6" placeholder="marza"></td></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="p-2 "><td><input type="number" step="0.01" min="0" lang="en" name="zarRad" size="6" placeholder="zarada radnika"></td></div>            
           </tr>
         </tbody>
       </div>  

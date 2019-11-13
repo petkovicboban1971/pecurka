@@ -26,7 +26,7 @@
 		        			</option>
 	        			@endforeach
 	        		</select><br><br>
-		        	<input type="text" id="kolicina" style="float: right;" name="kolicina" size="9" placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled><br><br>
+		        	<input type="number" step="0.01" min="0" lang="en" id="kolicina" style="float: right;" name="kolicina" size="9" placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled><br><br>
 	        		<textarea style="margin-left: 15px;" rows="4" cols="22" name="opis" form="myForm"> {{ AdminOptions::lang(7, Session::get('jezik.AdminOptions::server()')) }}</textarea>
 		        </div>
 		        <div class="modal-footer">

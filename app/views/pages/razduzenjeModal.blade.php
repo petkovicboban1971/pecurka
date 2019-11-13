@@ -29,7 +29,7 @@
 						<option value="2">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</option>
 						<option value="3">{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</option>    		
 		        	</select>
-		        	<input type="text" id="kolicina" style="float: right;" name="novaKolicina" size="6" placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
+		        	<input type="number" step="0.01" min="0" lang="en" id="kolicina" style="float: right;" name="novaKolicina" size="6" placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
 					<input type="hidden" name="proizvod" value="{{ $proizvod->proizvod }}">
 		        </div>
 		        <div class="modal-footer">

@@ -19,7 +19,7 @@
         </option>
     @endforeach
 </select> 
-<input type="text" id="gender1" class="kolicina" name="kolicina"  placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
+<input type="number" step="0.01" min="0" lang="en" id="gender1" class="kolicina" name="kolicina"  placeholder="{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}" required disabled>
 <br>
 <br>
 <input type="submit" class="btn btn-success" value="{{ AdminOptions::lang(167, Session::get('jezik.AdminOptions::server()')) }}">

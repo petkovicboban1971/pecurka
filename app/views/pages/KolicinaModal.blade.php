@@ -12,7 +12,7 @@
                             <td>{{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}</td>
                         </th>
                     </table><br>
-                    <input style="height: 25px; margin: 3px; text-align: center;" type="text" name="kolicina" size="5" required>
+                    <input style="height: 25px; margin: 3px; text-align: center;" type="number" step="0.01" min="0" lang="en" name="kolicina" size="5" required>
                     <input type="hidden" name="radnik" value="{{ $radnik }}">
                 </center>          
             </div>  

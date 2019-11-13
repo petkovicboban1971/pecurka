@@ -53,7 +53,8 @@ Route::post('/pre-Welcome', 'HomeController@preWelcome');
 Route::post('/admin-login-store', 'Admin@admin_login_store');
 Route::get('/admin-login', 'HomeController@showWelcome');
 Route::get('/admin-welcome', 'HomeController@welcome'); 
-Route::get('/admin-logout', 'Admin@logout'); 
+Route::get('/admin-logout', 'Admin@logout');
+Route::post('/podaci_firma', 'HomeController@podaci_firma');
 
 // ulazne stavke
 Route::post('/admin-save-item', 'CrudController@store');

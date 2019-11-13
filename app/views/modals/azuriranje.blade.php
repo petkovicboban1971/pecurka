@@ -75,13 +75,13 @@
       <div class="form-group row">
         <label class="col-sm-4 control-label">{{ AdminOptions::lang(148, Session::get('jezik.AdminOptions::server()')) }}</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control input-sm" name="plata" placeholder="{{ AdminOptions::lang(147, Session::get('jezik.AdminOptions::server()')) }} {{ Firma::valuta() }}" autocomplete="off">
+          <input type="number" step="0.01" min="0" lang="en" class="form-control input-sm" name="plata" placeholder="{{ AdminOptions::lang(147, Session::get('jezik.AdminOptions::server()')) }} {{ Firma::valuta() }}" autocomplete="off">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-4 control-label"> </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control input-sm" name="procenat" placeholder="{{ AdminOptions::lang(126, Session::get('jezik.AdminOptions::server()')) }} %" autocomplete="off">
+          <input type="number" step="0.01" min="0" lang="en" class="form-control input-sm" name="procenat" placeholder="{{ AdminOptions::lang(126, Session::get('jezik.AdminOptions::server()')) }} %" autocomplete="off">
         </div>
       </div>
     <div class="form-group row">

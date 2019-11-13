@@ -174,7 +174,7 @@ class ProdajaController extends \BaseController {
     	$postojeci_proizvod = cene_datumi::where('proizvod_id', Input::get('proizvod'))->pluck('id');
 
     	$dnevna_cena_proizvoda = new cene_datumi();
-    	$dnevna_cena_proizvoda->cene = Input::get('kolicina');
+    	$dnevna_cena_proizvoda->cene = floatval(Input::get('kolicina'));
     	$dnevna_cena_proizvoda->proizvod_id = Input::get('proizvod');
     	$dnevna_cena_proizvoda->created_at = date('Y-m-d');
     	$dnevna_cena_proizvoda->save(); 

@@ -18,9 +18,9 @@
                             <td>{{ AdminOptions::lang(126, Session::get('jezik.AdminOptions::server()')) }}</td>
                         </th>
                     </table><br>
-                    <input style="height: 25px; margin: 3px; text-align: center;" type="text" name="kolicina" size="5" placeholder="Kg">
+                    <input style="height: 25px; margin: 3px; text-align: center;" type="number" step="0.01" min="0" lang="en" name="kolicina" size="5" placeholder="Kg">
                     <input style="height: 25px; margin: 3px; text-align: center;" type="text" name="Id" size="5">
-                    <input style="height: 25px; margin: 3px; text-align: center;" type="text" name="zarRad" size="5" placeholder="%">
+                    <input style="height: 25px; margin: 3px; text-align: center;" type="number" step="0.01" min="0" lang="en"name="zarRad" size="5" placeholder="%">
                     <input type="hidden" name="Product"> 
                 </center>          
             </div>  

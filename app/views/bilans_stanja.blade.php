@@ -16,7 +16,7 @@
         word-wrap: break-word !important;
     }
     table thead, th, td, tr{
-        width: 125px !important;
+        width: 129px !important;
     }
 </style>
 <table class="navbar1">
@@ -39,11 +39,11 @@
             <th style="font-weight: bold;">
                 {{ AdminOptions::lang(141, Session::get('jezik.AdminOptions::server()')) }}
             </th>                
-            <th style="text-align: center; color: #00cc00; font-weight: bold;">
+            <th style="text-align: center !important; color: #00cc00; font-weight: bold;">
                 {{ AdminOptions::lang(216, Session::get('jezik.AdminOptions::server()')) }}                         
             </th>
             <th></th>
-            <th style="text-align: center; color: red; font-weight: bold;">
+            <th style="text-align: center !important; color: red; font-weight: bold;">
                 {{ AdminOptions::lang(217, Session::get('jezik.AdminOptions::server()')) }}
             </th>
             <td></td>
@@ -56,7 +56,7 @@
                 }
                 $pom2 = $pom2 - dobavljaci_isplata::where('nacin', 1)->sum('iznos');
             ?>
-            <th style="text-align: center; color: blue; font-weight: bold;">
+            <th style="text-align: center !important; color: blue; font-weight: bold;">
                 {{ AdminOptions::lang(139, Session::get('jezik.AdminOptions::server()')) }}
             </th>
             <td></td>
@@ -77,17 +77,17 @@
     <tbody>   
         <tr>
             <td>&nbsp;</td>
-            <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td>{{ AdminOptions::lang(241, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td>{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(242, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td>{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
-            <td>{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="border-left: 1px solid #000;text-align: center !important;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="text-align: center !important;">{{ AdminOptions::lang(241, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="border-left: 1px solid #000;text-align: center !important;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="text-align: center !important;">{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="border-left: 1px solid #000;text-align: center !important;">{{ AdminOptions::lang(242, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="text-align: center !important;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td>
+            <td style="text-align: center !important;">{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td>
         </tr>                 
         @foreach(Buyers::where('aktivan', 1)->get() as $b1 => $naziv)
             <tr>
-                <td>{{ $naziv->naziv }}</td>  
+                <td style="text-align: left !important; font-weight: bold;">{{ $naziv->naziv }}</td>  
                 <?php $pom1 = 0; ?>                         
                 @for($i=1; $i < count($vrsta_prodaje); $i++)
                     <td style="border-left: 1px solid #000;">
@@ -180,9 +180,9 @@
             <td></td> -->
             <tr>
                 <td>&nbsp;</td>
-                <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(249, Session::get('jezik.AdminOptions::server()')) }}</td>
-                <td style="border-left: 1px solid #000;">{{ AdminOptions::lang(181, Session::get('jezik.AdminOptions::server()')) }}</td>
-                <td>{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td><!-- 
+                <td style="border-left: 1px solid #000; text-align: center !important;">{{ AdminOptions::lang(249, Session::get('jezik.AdminOptions::server()')) }}</td>
+                <td style="border-left: 1px solid #000; text-align: center !important;">{{ AdminOptions::lang(181, Session::get('jezik.AdminOptions::server()')) }}</td>
+                <td style="text-align: center !important;">{{ AdminOptions::lang(182, Session::get('jezik.AdminOptions::server()')) }}</td><!-- 
                 <td>{{ AdminOptions::lang(187, Session::get('jezik.AdminOptions::server()')) }}</td> -->
                 <td style="border-left: 1px solid #000;"></td>
                 <td style="border-left: 1px solid #000;"></td>
@@ -194,7 +194,7 @@
         </tr>
         @foreach(dobavljaci::where('aktivan', 1)->get() as $key => $dobavljac)
             <tr>
-                <td>{{ $dobavljac->naziv_dobavljaca }}</td>
+                <td style="text-align: left !important; font-weight: bold;">{{ $dobavljac->naziv_dobavljaca }}</td>
                 <td style="border-left: 1px solid #000; border-right: 1px solid #000;">
                     {{ number_format($unos_dobavljaca[$key],2,",",".") }} 
                     {{ Firma::valuta() }}

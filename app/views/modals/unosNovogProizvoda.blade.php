@@ -26,13 +26,13 @@
         <div class="form-group row">
           <label class="col-sm-4 control-label">{{ AdminOptions::lang(105, Session::get('jezik.AdminOptions::server()')) }}</label>
           <div class="col-sm-8">
-            <input type="text" id="cena_proizvoda1" class="form-control input-sm cheque-amt" name="cena_proizvoda" autocomplete="off" required>
+            <input type="number" step="0.01" min="0" lang="en" id="cena_proizvoda1" class="form-control input-sm cheque-amt" name="cena_proizvoda" autocomplete="off" required>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 control-label">{{ AdminOptions::lang(219, Session::get('jezik.AdminOptions::server()')) }}</label>
           <div class="col-sm-8">
-            <input type="text" id="cena_proizvoda1" class="form-control input-sm cheque-amt" name="proizvodna_cena" autocomplete="off" required>
+            <input type="number" step="0.01" min="0" lang="en" id="cena_proizvoda1" class="form-control input-sm cheque-amt" name="proizvodna_cena" autocomplete="off" required>
           </div>
         </div>
         <div class="form-group row">
@@ -40,8 +40,8 @@
           <span>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="checkbox" id="checkbox2" name="check" value="1">&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" id="tezina_pakovanja" name="tezina_pakovanja" autocomplete="off" placeholder="tezina pakovanja (gr)" required disabled="true">&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" id="cena_pakovanja" name="cena_proizvoda" autocomplete="off" placeholder="cena pakovanja" required disabled="true"> 
+            <input type="number" step="0.01" min="0" lang="en" id="tezina_pakovanja" name="tezina_pakovanja" autocomplete="off" placeholder="tezina pakovanja (gr)" required disabled="true">&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" step="0.01" min="0" lang="en" id="cena_pakovanja" name="cena_proizvoda" autocomplete="off" placeholder="cena pakovanja" required disabled="true"> 
           </span>
         </div> 
       </div> 

@@ -69,7 +69,7 @@ class ProductController extends \BaseController {
 		/*if ($_POST['kolicina_proizvoda']) {
 			$data->kolicina_proizvoda = $_POST['kolicina_proizvoda'];
 		}*/
-		if ($_POST['cena_proizvoda']) {
+		if (isset($_POST['cena_proizvoda'])) {
 			$data->cena_proizvoda = $_POST['cena_proizvoda'];
 		}
 		if ($_POST['proizvodna_cena']) {

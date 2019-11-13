@@ -13,7 +13,7 @@
 @endif
 </select>
 <span style="margin-left: 50px;">
-    <input type="text" class="iznos_uplate" name="iznos_isplate" size="10" placeholder="{{ AdminOptions::lang(146, Session::get('jezik.AdminOptions::server()')) }}" required disabled> {{ Firma::valuta() }}
+    <input type="number" step="0.01" min="0" lang="en" class="iznos_uplate" name="iznos_isplate" size="10" placeholder="{{ AdminOptions::lang(146, Session::get('jezik.AdminOptions::server()')) }}" required disabled> {{ Firma::valuta() }}
     <button type="submit" class="btn btn-success potvrda_uplate" style="margin-left: 25px;" disabled>
         {{ AdminOptions::lang(185, Session::get('jezik.AdminOptions::server()')) }}
     </button>

@@ -4,7 +4,7 @@
         $iznos = 0;
     ?>
     <tr>
-        <td>
+        <td style=" text-align: left !important;">
             {{ date_format(date_create($datumi[$j]), "d.m.Y.") }}
         </td>
         <tr>

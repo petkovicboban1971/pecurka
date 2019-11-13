@@ -200,7 +200,7 @@
                             @endfor
                         </div>
                         <span style="margin-left: 50px;">
-                            <input type="text" class="iznos_uplate" name="iznos_uplate" size="10" placeholder="{{ AdminOptions::lang(146, Session::get('jezik.AdminOptions::server()')) }}" required disabled> {{ Firma::valuta() }}
+                            <input type="number" step="0.01" min="0" lang="en" class="iznos_uplate" name="iznos_uplate" size="10" placeholder="{{ AdminOptions::lang(146, Session::get('jezik.AdminOptions::server()')) }}" required disabled> {{ Firma::valuta() }}
                             <button type="submit" class="btn btn-success potvrda_uplate" style="margin-left: 25px;" disabled>
                                 {{ AdminOptions::lang(185, Session::get('jezik.AdminOptions::server()')) }}
                             </button>
@@ -221,7 +221,7 @@
                             </div>
                             <br>
                             @foreach($kupci as $kupac)
-                                <a href="/izbor_kupca_faktura?faktura={{$kupac->id}}" class="btn btn-info" style="width: 145px;">
+                                <a href="/izbor_kupca_faktura?faktura={{$kupac->id}}" class="btn btn-info" style="width: 145px; text-align: right !important;">
                                     {{ $kupac->naziv }}
                                 </a>
                             @endforeach                        
@@ -235,22 +235,22 @@
                         <table>
                             <thead style="border-top: 1px solid #777777;">
                                 <tr>
-                                    <th style="background-color: #f0f0ef;border: 1p">
+                                    <th style="background-color: #f0f0ef; text-align: left !important;">
                                         {{ AdminOptions::lang(121, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
-                                    <th style="background-color: #f0f0ef;">
+                                    <th style="background-color: #f0f0ef; text-align: right !important;">
                                         {{ AdminOptions::lang(203, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
-                                    <th style="background-color: #f0f0ef;border: 1p">
+                                    <th style="background-color: #f0f0ef; text-align: right !important;">
                                         {{ AdminOptions::lang(124, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
-                                    <th style="background-color: #f0f0ef;border: 1p">
+                                    <th style="background-color: #f0f0ef; text-align: right !important;">
                                         {{ AdminOptions::lang(105, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
-                                    <th style="background-color: #f0f0ef;border: 1p">
+                                    <th style="background-color: #f0f0ef; text-align: right !important;">
                                         {{ AdminOptions::lang(146, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
-                                    <th style="background-color: #f0f0ef;border: 1p">
+                                    <th style="background-color: #f0f0ef; text-align: right !important;">
                                         {{ AdminOptions::lang(81, Session::get('jezik.AdminOptions::server()')) }}
                                     </th>
                                 </tr>
@@ -575,7 +575,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i>{{ AdminOptions::lang(12, Session::get('jezik.AdminOptions::server()')) }}</a>
+                        <a href="#" class="podaci_firma"><i class="fa fa-edit"></i>{{ AdminOptions::lang(12, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
@@ -679,6 +679,11 @@
     @include('modals/pregled_dnevnih_cena')
 </div>
 
+<!--- MODAL PODACI O FIRMI --->
+<div id="podaci_firma" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
+    @include('modals/podaci_firma')
+</div>
+
 <script type="text/javascript">
 
     $(document).ready(function() {   
@@ -771,6 +776,10 @@
 
         $(".dnevna_cena_proizvoda").on("click", function() {
             $("#dnevna_cena_proizvoda").modal('show');
+        });
+
+        $(".podaci_firma").on("click", function() {
+            $("#podaci_firma").modal('show');
         });
 
         $(".valute").on("click", function() {
