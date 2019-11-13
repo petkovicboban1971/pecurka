@@ -52,7 +52,7 @@
             @if($kupac->realiz_uplate == 0)
                 <button class="btn btn-warning provera" data-link="/realiz_uplate_faktura?faktura={{ $kupac->kupac }}&iznos={{ $iznos0[$j] }}&datum={{$kupac->created_at}}" style="float: right; width: 130px;">{{ AdminOptions::lang(225, Session::get('jezik.AdminOptions::server()')) }}
             @else
-                @if($kupac->created_at != date('Y-m-d'))
+                @if(date_format(date_create($kupac->updated_at), 'Y-m-d') < date('Y-m-d'))
                     <button class="btn provera" data-link="/realiz_uplate_faktura?faktura={{ $kupac->kupac }}&iznos={{ $iznos0[$j] }}&datum={{$kupac->created_at}}&storno=1" style="float: right; width: 130px; background-color: red; color: #fff; font-weight: bold;" disabled>{{ AdminOptions::lang(239, Session::get('jezik.AdminOptions::server()')) }}
                 @else
                     <button class="btn provera" data-link="/realiz_uplate_faktura?faktura={{ $kupac->kupac }}&iznos={{ $iznos0[$j] }}&datum={{$kupac->created_at}}&storno=1" style="float: right; width: 130px; background-color: red; color: #fff; font-weight: bold;">{{ AdminOptions::lang(239, Session::get('jezik.AdminOptions::server()')) }}
