@@ -585,7 +585,7 @@
                         <a href="/create-article"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i>{{ AdminOptions::lang(13, Session::get('jezik.AdminOptions::server()')) }}</a>
+                        <a href="#" class="nova_lozinka"><i class="fa fa-edit"></i>{{ AdminOptions::lang(13, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li> 
                     <li>
                         <a href="#" class="valute">
@@ -688,6 +688,11 @@
     @include('modals/podaci_firma')
 </div>
 
+<!--- MODAL NOVA LOZINKA --->
+<div id="nova_lozinka" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
+    @include('modals/nova_lozinka')
+</div>
+
 <script type="text/javascript">
 
     $(document).ready(function() {   
@@ -784,6 +789,10 @@
 
         $(".podaci_firma").on("click", function() {
             $("#podaci_firma").modal('show');
+        })
+        
+        $(".nova_lozinka").on("click", function() {
+            $("#nova_lozinka").modal('show');
         });
 
         $(".valute").on("click", function() {

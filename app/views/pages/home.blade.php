@@ -78,7 +78,7 @@ background-repeat: no-repeat; background-position: center center;
                 </a>
                
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">
                     <i class="fa fa-font fa-2x"></i>
                     <span class="nav-text">
@@ -110,8 +110,8 @@ background-repeat: no-repeat; background-position: center center;
                     </span>
                 </a>
             </li>
-        </ul>
-
+        </ul> -->
+        <div style="padding-top: 55vh;">
         <ul class="logout">
             <li>
                <a href="/admin-logout">
@@ -122,6 +122,7 @@ background-repeat: no-repeat; background-position: center center;
                 </a>
             </li>  
         </ul>
+        </div>
     </nav>
 
     <div id="datum"> 

@@ -271,4 +271,23 @@ class HomeController extends BaseController {
 
 	}
 
+	public function nova_lozinka(){
+
+		if(Input::get('stara_lozinka') != radnici::find(Session::get('log_sesija'.AdminOptions::server()))->lozinka){
+			Session::flash('err', AdminOptions::lang(271, Session::get("jezik.AdminOptions::server()")));
+			return Redirect::back();
+		}
+
+		if(Input::get('nova_lozinka1') != Input::get('nova_lozinka2')){
+			Session::flash('err', AdminOptions::lang(272, Session::get("jezik.AdminOptions::server()")));
+			return Redirect::back();
+		}
+		$nova_lozinka = radnici::find(Session::get('log_sesija'.AdminOptions::server()));
+		$nova_lozinka->lozinka = Input::get('nova_lozinka1');
+		$nova_lozinka->update();
+			Session::flash('msg', AdminOptions::lang(273, Session::get("jezik.AdminOptions::server()")));
+			return Redirect::back();
+
+	}
+
 }

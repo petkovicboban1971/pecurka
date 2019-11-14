@@ -304,8 +304,7 @@ class CrudController extends \BaseController {
 		      	//$fileName = Input::file('file')->getClientOriginalName(); // getting image name
 		      	$path = __DIR__.'/../../images/';
 				$clanak->image = 'pecurka1.png'; 
-		      	Input::file('file')->move($path, $clanak->image);
-		      	 
+		      	Input::file('file')->move($path, $clanak->image); 
 		    }
 	    }
 	    	

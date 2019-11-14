@@ -57,6 +57,7 @@ Route::get('/admin-logout', 'Admin@logout');
 Route::post('/podaci_firma', 'HomeController@podaci_firma');
 Route::get('/create-article', 'CrudController@create_article');
 Route::post('/create-article-ajax', 'CrudController@create_ajax');
+Route::post('/nova_lozinka', 'HomeController@nova_lozinka');
 
 // ulazne stavke
 Route::post('/admin-save-item', 'CrudController@store');

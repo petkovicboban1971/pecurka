@@ -25,7 +25,11 @@
 				<tr>
 					<td>{{ Radnici::find($prethodnoZaduzen->radnik)->ime }} {{ Radnici::find($prethodnoZaduzen->radnik)->prezime }}</td>
 					<td>{{ proizvodi::find($prethodnoZaduzen->proizvod)->naziv_proizvoda }}</td>
-					<td>{{ $prethodnoZaduzen->kolicina }}</td>
+					@if($prethodnoZaduzen->pakovanje == 0)
+						<td>{{ $prethodnoZaduzen->kolicina }} kg</td>
+					@else
+						<td>{{ $prethodnoZaduzen->pakovanje }} {{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</td>
+					@endif
 					<td>{{ $prethodnoZaduzen->magacin }}</td>
 				</tr>
 			@endforeach
