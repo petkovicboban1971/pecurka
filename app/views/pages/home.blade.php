@@ -78,14 +78,17 @@ background-repeat: no-repeat; background-position: center center;
                 </a>
                
             </li>
-            <!-- <li>
-                <a href="#">
-                    <i class="fa fa-font fa-2x"></i>
-                    <span class="nav-text">
-                        Quotes
-                    </span>
-                </a>
-            </li>
+            @if(radnici::find(Session::get('log_sesija'.AdminOptions::server()))->rola == 10)
+                <li>
+                    <a href="/admin-welcome">
+                        <i class="fa fa-arrow-left fa-2x"></i>
+                        <span class="nav-text">
+                            {{ AdminOptions::lang(274, Session::get('jezik.AdminOptions::server()')) }}
+                        </span>
+                    </a>
+                </li>
+            @endif
+            <!-- 
             <li>
                <a href="#">
                    <i class="fa fa-table fa-2x"></i>
