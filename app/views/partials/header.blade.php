@@ -7,7 +7,8 @@
 	<meta name="msapplication-tap-highlight" content="no"/>
   {{ HTML::style('css/style.css') }}<!-- 
   	<link rel="stylesheet" href="css/style.css"> -->
-	<link rel="icon" type="image/png" href="favicon.ico">
+  	<link rel="icon" type="image/png" sizes="32x32" href="{{ 'images/pecurka1.png' }}">
+	<!-- <link rel="icon" type="image/png" href="favicon.ico"> -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'><!-- 
 	<link rel="stylesheet" href="/css/alertify.core.css">
     <link rel="stylesheet" href="/css/alertify.default.css">

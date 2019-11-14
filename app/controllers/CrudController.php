@@ -264,4 +264,58 @@ class CrudController extends \BaseController {
 		));
 	}
 
+
+	public function create_article(){
+		return View::make('welcome', array(
+			'pom' => 16
+		));
+	}
+
+	public function create_ajax(){
+
+		$clanak = Firma::find(1);
+		if (null != Input::file('file')) {
+			
+	        $image = Input::file('file');
+	        $max_image_size = 2048;
+	        $max_images = 10;
+	        $success = false;
+	 
+	        $validator = Validator::make(
+	            array('file' => 'mimes:jpg,png,jpeg|max:'.strval($max_image_size)),
+	            array(
+	                'mimes' => 'Neodgovarajući format slike. Dozvoljeni formati su jpg, png i jpeg.',
+	                'max' => 'Maksimalna veličina slike je '.strval($max_image_size / 1000).' MB.',
+	                )
+	            );
+	        if($validator->fails()){
+	            $success = false;
+	            $error_message = $validator->messages()->first();
+	            break;
+	        }else{
+	            $success = true;
+	        }
+	            
+	        if($success){
+	        	//$file = $image->picture_path;
+		        $filename ='images/pecurka1.png';
+		        File::delete($filename);
+		        //File::delete('favicon.ico');
+		      	//$fileName = Input::file('file')->getClientOriginalName(); // getting image name
+		      	$path = __DIR__.'/../../images/';
+				$clanak->image = 'pecurka1.png'; 
+		      	Input::file('file')->move($path, $clanak->image);
+		      	 
+		    }
+	    }
+	    	
+		$clanak->opis = $_POST['tekstClanka'];
+		$clanak->timestamps = false;
+      	$clanak->update();	      	
+		Session::flash('msg', AdminOptions::lang(266, Session::get('jezik.AdminOptions::server()'))); 
+
+      	return Response::json(array('msg'=>true));
+      	
+	}
+
 }

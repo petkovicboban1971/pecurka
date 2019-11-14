@@ -317,6 +317,10 @@
             @if(!empty($pom) && $pom == 15)
                 @include('modals.otpis')
             @endif
+<!-- Opis -->
+            @if(!empty($pom) && $pom == 16)
+                @include('create_article')
+            @endif
         </ul>
     </div>
 
@@ -578,7 +582,7 @@
                         <a href="#" class="podaci_firma"><i class="fa fa-edit"></i>{{ AdminOptions::lang(12, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
+                        <a href="/create-article"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-edit"></i>{{ AdminOptions::lang(13, Session::get('jezik.AdminOptions::server()')) }}</a>
