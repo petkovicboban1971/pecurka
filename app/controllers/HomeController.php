@@ -290,4 +290,12 @@ class HomeController extends BaseController {
 
 	}
 
+	public function dodela_lozinke(){
+		$radnici = radnici::where('aktivan', '!=', 2)->get();
+		return View::make('welcome', array(
+			'radnici' => $radnici,
+			'pom' => 17
+		));
+	}
+
 }

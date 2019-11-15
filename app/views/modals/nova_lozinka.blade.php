@@ -6,14 +6,14 @@
                 {{ radnici::find(Session::get('log_sesija'.AdminOptions::server()))->ime }}
             </h4>
         </div>
-        <form action="/nova_lozinka" name="nova_lozinka" method="POST" >
+        <form action="/nova_lozinka" name="nova_lozinka" method="POST" autocomplete="off">
             <div class="modal-body">
                 <div class="form-group row">
                     <label class="col-sm-6 control-label">
                         {{ AdminOptions::lang(268, Session::get('jezik.AdminOptions::server()')) }}
                     </label>
                     <div class="col-sm-4">
-                        <input type="password" class="form-control input-sm invoice-amt" name="stara_lozinka" autocomplete="off" required>
+                        <input type="password" class="form-control input-sm invoice-amt" name="stara_lozinka" required autocomplete="off">
                     </div>       
                 </div>
                 <div class="form-group row">

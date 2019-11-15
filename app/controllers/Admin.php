@@ -22,7 +22,7 @@ class Admin extends Controller{
             ));
 
             if($validator->fails()){
-                return Redirect::to(AdminOptions::base_url().'admin-login')->withInput()->withErrors($validator->messages());
+                return Redirect::to('/admin-login')->withInput()->withErrors($validator->messages());
             }
             
             $rola = DB::table('radnici')->where(array('ime'=>addslashes($username),'lozinka'=>addslashes($password)))->pluck('rola');

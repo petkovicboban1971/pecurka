@@ -9,13 +9,6 @@
 {{ HTML::style('css/styleHorizBarChart.css') }}
 {{ HTML::style('css/horizBarChart.css') }} 
 
-@if (Session::has('success'))  
-    <script src="{{ AdminOptions::base_url()}}js/bootbox/bootbox.js" type="text/javascript"></script>   
-    <script type="text/javascript">
-      bootbox.alert("<?php echo Session::get('success'); ?>");
-    </script> 
-    <?php Session::forget('success') ?>             
-@endif
 @if (Session::has('msg'))
     <script type="text/javascript">
       alertify.success("<?php echo Session::get('msg'); ?>")
@@ -321,6 +314,10 @@
             @if(!empty($pom) && $pom == 16)
                 @include('create_article')
             @endif
+<!-- Dodela lozinki radnicima -->
+            @if(!empty($pom) && $pom == 17)
+                @include('dodela_lozinke')
+            @endif
         </ul>
     </div>
 
@@ -540,13 +537,21 @@
                         <a href="/istorija_obracuna" ><i class="fa fa-history"></i><b>{{ AdminOptions::lang(236, Session::get('jezik.AdminOptions::server()')) }}</b></a>
                     </li>
                     <li>
-                        <a href="#" class="noviRadnik" aria-hidden="true">
-                            <i class="fa fa-edit"></i>
-                            <b>{{ AdminOptions::lang(6, Session::get('jezik.AdminOptions::server()')) }}</b>
-                        </a>
+                        <a href="{{ AdminOptions::base_url() }}workers1" ><i class="fa fa-female"></i><b>{{ AdminOptions::lang(69, Session::get('jezik.AdminOptions::server()')) }}</b></a>
+                        <ul>
+                            <li>
+                                <a href="#" class="noviRadnik" aria-hidden="true">
+                                    <i class="fa fa-edit"></i>
+                                    <b>{{ AdminOptions::lang(6, Session::get('jezik.AdminOptions::server()')) }}</b>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="{{ AdminOptions::base_url() }}workers1" ><i class="fa fa-female"></i><b>{{ AdminOptions::lang(69, Session::get('jezik.AdminOptions::server()')) }}</b></a>
+                        <a href="/dodela_lozinke" class="dodela_lozinke" aria-hidden="true">
+                            <i class="fa fa-question"></i>
+                            <b>{{ AdminOptions::lang(275, Session::get('jezik.AdminOptions::server()')) }}</b>
+                        </a>
                     </li>
                 </ul>
             </li>

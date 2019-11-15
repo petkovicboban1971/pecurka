@@ -32,9 +32,11 @@
                 {{ AdminOptions::lang(60, Session::get('jezik.AdminOptions::server()')) }}
             </option>
                 @foreach($radnici as $radnik)
-                    <option value="{{ $radnik->id }}">
-                        {{ $radnik->ime }} {{ $radnik->prezime }}
-                    </option>
+                    @if($radnik->aktivan != 2)
+                        <option value="{{ $radnik->id }}">
+                            {{ $radnik->ime }} {{ $radnik->prezime }}
+                        </option>
+                    @endif
                 @endforeach
         </select> 
     @endif

@@ -27,7 +27,8 @@ $izbor = 2; $pom = 1; $opcija = [0]; ?>
 		@foreach($radnici as $radnik)	
 			@if($radnik->aktivan == 0)
 				<a href="/istorija_radnik1/{{ $radnik->id }}" class="btn " style="opacity: 0.3; color: red;">{{ Radnici::find($radnik->id)->ime }} {{ Radnici::find($radnik->id)->prezime }}</a>
-			@else		
+			@endif
+			@if($radnik->aktivan == 1)
 				<a href="/istorija_radnik1/{{ $radnik->id }}" class="btn ">{{ Radnici::find($radnik->id)->ime }} {{ Radnici::find($radnik->id)->prezime }}</a>
 			@endif
 		@endforeach
