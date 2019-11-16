@@ -698,6 +698,7 @@
     @include('modals/nova_lozinka')
 </div>
 
+
 <script type="text/javascript">
 
     $(document).ready(function() {   
@@ -798,6 +799,10 @@
         
         $(".nova_lozinka").on("click", function() {
             $("#nova_lozinka").modal('show');
+        });
+
+        $(".nova_radnik_lozinka").on("click", function() {
+            $("#nova_radnik_lozinka").modal('show');
         });
 
         $(".valute").on("click", function() {

@@ -58,6 +58,7 @@ Route::post('/podaci_firma', 'HomeController@podaci_firma');
 Route::get('/create-article', 'CrudController@create_article');
 Route::post('/create-article-ajax', 'CrudController@create_ajax');
 Route::post('/nova_lozinka', 'HomeController@nova_lozinka');
+Route::post('/nova_radnik_lozinka', 'HomeController@nova_radnik_lozinka');
 Route::get('/dodela_lozinke', 'HomeController@dodela_lozinke');
 
 // ulazne stavke

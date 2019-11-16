@@ -107,3 +107,18 @@
   	-moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   	-webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+.dodela_lozinke{
+	padding: 30px;
+}
+.radnik_lozinka{
+	position: relative;
+	padding-left: 12vh;
+}
+.naslov_lozinka{
+	font-weight: bold !important; 
+	border: 1px solid gray; 
+	text-align: center; 
+	padding: 5px; 
+	width: 40vh;
+}

@@ -17,7 +17,7 @@ class HomeController extends BaseController {
     	return View::make('login');
 	}
 
-	public function preWelcome(){        	
+	public function preWelcome(){	 	
 		Session::put('jezik.AdminOptions::server()', $_POST['jezik']);
 		return View::make('login');
 	}
@@ -291,11 +291,25 @@ class HomeController extends BaseController {
 	}
 
 	public function dodela_lozinke(){
-		$radnici = radnici::where('aktivan', '!=', 2)->get();
+		$radnici = radnici::where('aktivan', 1)->where('rola', '!=', 10)->get();
 		return View::make('welcome', array(
 			'radnici' => $radnici,
 			'pom' => 17
 		));
+	}
+
+	public function nova_radnik_lozinka(){
+		
+		if (Input::get('nova_lozinka1') != Input::get('nova_lozinka2')) {
+			Session::flash('err', AdminOptions::lang(272, Session::get("jezik.AdminOptions::server()")));
+			return Redirect::back();
+		}
+
+		$radnik = radnici::find(Input::get('radnik'));
+		$radnik->lozinka = Input::get('nova_lozinka1');
+		$radnik->update();
+		Session::flash('msg', AdminOptions::lang(273, Session::get("jezik.AdminOptions::server()")));
+		return Redirect::to('/admin-welcome');
 	}
 
 }

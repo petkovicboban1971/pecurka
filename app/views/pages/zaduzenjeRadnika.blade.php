@@ -81,7 +81,7 @@
 <body>
 <?php $text = AdminOptions::lang(119, Session::get('jezik.AdminOptions::server()')); ?>
 @include('pages/home')
-<?php $pom = DB::table('veza')->where('magacin', 1)->get(); 
+<?php $pom = veza::where('magacin', 1)->get(); 
 	//var_dump($pom);die();
 
 	//print_r(veza::find(8)->radnik); die();
@@ -106,7 +106,8 @@
 		</center>
 	@endif -->
 	@if(empty($dataa1))
-		<?php if(empty($radnik_id)){
+		<?php 
+			if(empty($radnik_id)){
 				$izabraniRadnik = AdminOptions::lang(115, Session::get('jezik.AdminOptions::server()')).":";
 				$vrednost = 0;
 			}

@@ -26,11 +26,11 @@
 	            		<h4 class="modal-title"><center><b>Izaberite jezik / Select a language / Sprache wählen</center></b></h4>
 	          		</div>
 		          	<div class="modal-body">
-		          		<form action="/pre-Welcome"  method="post">
+		          		<form action="/pre-Welcome" method="post">
 			          		<center>
 			          			<button type="submit" name="jezik" value="sr" class="btn" style="width: 100px;">SRPSKI</button>
 			          			<button type="submit" name="jezik" value="en" class="btn" style="width: 100px;">ENGLISH</button>
-			          			<button type="submit" name="jezik" value="cr" class="btn" style="width: 100px;">DEUTSCH</button>
+			          			<button type="submit" name="jezik" value="de" class="btn" style="width: 100px;">DEUTSCH</button>
 			          		</center>
 		          		</form>
 		          	</div>
@@ -42,7 +42,7 @@
 	  	</script>
 	@endif
 		<div class="color-overlay-image"></div>
-		<div class="login-form-wrapper"  style="background-color: #F79F1F !important;">
+		<div class="login-form-wrapper" style="background-color: #F79F1F !important;">
 			<div class="login-form-wrapper__box">
 				<div class="form-avatar" style="background-color: #FFC312 !important;">
 					<a class="logo" href="https://bexter.rs" title="Bexter Design"><img src="images/Logo1.png" alt="Bexter Design"></a>
