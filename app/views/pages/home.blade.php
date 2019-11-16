@@ -113,18 +113,18 @@ background-repeat: no-repeat; background-position: center center;
                     </span>
                 </a>
             </li>
-        </ul> -->
-        <div style="padding-top: 55vh;">
-        <ul class="logout">
-            <li>
-               <a href="/admin-logout">
-                     <i class="fa fa-power-off fa-2x"></i>
-                    <span class="nav-text">
-                        {{ AdminOptions::lang(2, Session::get('jezik.AdminOptions::server()')) }}
-                    </span>
-                </a>
-            </li>  
-        </ul>
+        </ul> -->        
+        <div style="padding-top: 50vh;">
+            <ul class="logout">
+                <li>
+                   <a href="/admin-logout">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            {{ AdminOptions::lang(2, Session::get('jezik.AdminOptions::server()')) }}
+                        </span>
+                    </a>
+                </li>  
+            </ul>
         </div>
     </nav>
 

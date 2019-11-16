@@ -1,13 +1,13 @@
-<?php setlocale(LC_ALL, 'en_US.UTF-8'); ?>
+
 <div class="modal-dialog modal-sm">
    	<div class="modal-content">
         <div class="modal-header">
     		<button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">{{ AdminOptions::lang(254, Session::get('jezik.AdminOptions::server()')) }} </h4>
         </div>
-        <form method="post" action="/dnevna_cena_proizvoda" id="myForm">
+        <form method="post" action="/dnevna_cena_proizvoda">
 	        <div class="modal-body">
-	        	<select name="proizvod" id="nacin" style="width: 200px;font-weight: bold;">	  
+	        	<select name="proizvod" class="nacin_uplate" style="width: 200px;font-weight: bold;" required>	  
 	        		<option value="0" selected disabled>
 	        			{{ AdminOptions::lang(122, Session::get('jezik.AdminOptions::server()')) }}:
 	        		</option>        			
@@ -17,12 +17,16 @@
 	        			</option>
         			@endforeach
         		</select><br><br>
-	        	<input type="number" step="0.01" min="0" lang="en" id="kolicina" style="float: right;" name="kolicina" size="9" placeholder="{{ AdminOptions::lang(253, Session::get('jezik.AdminOptions::server()')) }}" required><br><br><!-- 
-        		<textarea style="margin-left: 15px;" rows="4" cols="22" name="opis" form="myForm"> {{ AdminOptions::lang(7, Session::get('jezik.AdminOptions::server()')) }}</textarea> -->
+	        	<input type="number" step="0.01" min="0" lang="en" class="iznos_uplate" style="float: right;" name="kolicina" size="9" disabled required placeholder="{{ AdminOptions::lang(253, Session::get('jezik.AdminOptions::server()')) }}"><br><br>
 	        </div> 
 	        <div class="modal-footer">
-	        	<button type="submit" class="btn btn-success btn1">{{ AdminOptions::lang(47, Session::get('jezik.AdminOptions::server()')) }}</button>
+	        	<button type="submit" class="btn btn-success potvrda_uplate" disabled>{{ AdminOptions::lang(47, Session::get('jezik.AdminOptions::server()')) }}</button>
 	        </div>
     	</form>
     </div>
 </div>
+<script type="text/javascript">	
+	$(document).ready(function(){	
+        
+    });
+</script>
