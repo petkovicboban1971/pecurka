@@ -276,6 +276,12 @@ class CrudController extends \BaseController {
 	public function create_ajax(){
 
 		$clanak = Firma::find(1);
+		if (null == $clanak) {
+		Session::flash('err', AdminOptions::lang(281, Session::get('jezik.AdminOptions::server()')) );
+
+		return Redirect::back();
+		}
+
 		if (null != Input::file('file')) {
 			
 	        $image = Input::file('file');
