@@ -318,6 +318,10 @@
             @if(!empty($pom) && $pom == 17)
                 @include('dodela_lozinke')
             @endif
+<!-- Promena podataka dobavljaca -->
+            @if(!empty($pom) && $pom == 18)
+                @include('izmena_dobavljaci')
+            @endif
         </ul>
     </div>
 
@@ -736,6 +740,17 @@
                 });
         }); 
 
+        $('.brisanje_dobavljaca').on('click', function(e){
+            e.preventDefault();
+            var link = $(this).data('link');
+            alertify.confirm("<?php echo AdminOptions::lang(226, Session::get('jezik.AdminOptions::server()')); ?>",
+                function(e){
+                    if(e){
+                        location.href = link;
+                    }
+                });
+        }); 
+
         $('.provera1').on('click', function(e){
             e.preventDefault();
             alertify.confirm("<?php echo AdminOptions::lang(226, Session::get('jezik.AdminOptions::server()')); ?>",
@@ -836,7 +851,8 @@
         $(".bilansStanja").on("click", function() {
 
             $.post('/bilansStanja', 
-                function (response){                                                    location.reload(true);
+                function (response){
+                    location.reload(true);
                 });
 
             $("#bilans").modal('show');
@@ -910,4 +926,5 @@
 //            });            
         })
     });
+    $("#izmena_dobavljaca").modal('show');
 </script>

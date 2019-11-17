@@ -124,6 +124,9 @@ Route::get('/grafik_dobavljaci', 'CrudController@grafik_dobavljaci');
 Route::get('/upisProizvoda/{id}', 'CrudController@upisProizvoda');
 Route::get('/isplate_dobavljacima/{id?}', 'CrudController@isplate_dobavljacima');
 Route::get('/pregled_ispl_dobavljaca', 'CrudController@pregled_ispl_dobavljaca');
+Route::get('/brisanje_dobavljaca/{id}', 'CrudController@brisanje_dobavljaca');
+Route::get('/izmena_dobavljaca/{id}', 'CrudController@izmena_dobavljaca');
+Route::post('/izmena_podataka_dobavljaca', 'CrudController@izmena_podataka_dobavljaca');
 Route::post('/unos_isplate_dobavljaca', 'CrudController@unos_isplate_dobavljaca');
 Route::post('/kolicinedobavljaca', 'CrudController@kolicinedobavljaca');
 

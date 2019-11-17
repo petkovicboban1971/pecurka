@@ -33,7 +33,7 @@
         <a href="{{ AdminOptions::base_url()}}admin-delete-item/{{ $ulazna_stavka->ulazna_stavka_id }}" 
         title="{{ AdminOptions::lang(67, Session::get('jezik.AdminOptions::server()')) }}"  
         onclick="return confirm('{{ AdminOptions::lang(44, Session::get('jezik.AdminOptions::server()')) }}');">
-          <i class="fa fa-times" 
+          <i class="fa fa-trash" 
           style="color:red;"                                
           aria-hidden="true">
           </i>

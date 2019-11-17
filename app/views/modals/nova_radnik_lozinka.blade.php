@@ -14,7 +14,7 @@
                     @endforeach
                 </div>
                 <div class="radnik_lozinka">
-                    <select name="radnik" required style="width: 235px;">
+                    <select name="radnik" required style="width: auto;">
                         <option selected disabled>
                             {{ AdminOptions::lang(60, Session::get('jezik.AdminOptions::server()')) }}
                         </option>
@@ -27,19 +27,19 @@
                     <br>
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-7 control-label">
+                        <label class="col-sm-5 control-label">
                             {{ AdminOptions::lang(269, Session::get('jezik.AdminOptions::server()')) }}
                         </label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4" style="width: auto; float: right;">
                             <input type="password" class="form-control input-sm cheque-amt" name="nova_lozinka1" autocomplete="off" required>
                         </div><!-- 
                     </div>
                     <div class="form-group row">
  -->                    <br><br>    
-                        <label class="col-sm-7 control-label">
+                        <label class="col-sm-5 control-label">
                             {{ AdminOptions::lang(270, Session::get('jezik.AdminOptions::server()')) }}
                         </label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4" style="width: auto; float: right;">
                             <input type="password" class="form-control input-sm cheque-amt" name="nova_lozinka2" autocomplete="off" required>
                         </div>
                     </div>

@@ -14,15 +14,29 @@
 						<td style="width: 80px !important; font-weight: bold;">{{ AdminOptions::lang(22, Session::get('jezik.AdminOptions::server()')) }}</td>
 						<td style="width: 80px !important; font-weight: bold;">{{ AdminOptions::lang(264, Session::get('jezik.AdminOptions::server()')) }}</td>
 						<td style="width: 80px !important; font-weight: bold;">{{ AdminOptions::lang(85, Session::get('jezik.AdminOptions::server()')) }}</td>
+						<td style="width: 40px !important;">{{ AdminOptions::lang(25, Session::get('jezik.AdminOptions::server()')) }}</td>
+						<td style="width: 40px !important;">{{ AdminOptions::lang(21, Session::get('jezik.AdminOptions::server()')) }}</td>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(dobavljaci::all() as $pregled_dobavljaca)
+					@foreach(dobavljaci::all() as $dobavljac)
 						<tr>
-							<td>{{ $pregled_dobavljaca->naziv_dobavljaca }}</td>
-							<td>{{ $pregled_dobavljaca->adresa }}</td>
-							<td>{{ $pregled_dobavljaca->ziro_racun }}</td>
-						</tr>
+							<td>{{ $dobavljac->naziv_dobavljaca }}</td>
+							<td>{{ $dobavljac->adresa }}</td>
+							<td>{{ $dobavljac->ziro_racun }}</td>
+							<td>
+								<a href="/izmena_dobavljaca/{{ $dobavljac->id }}">
+									<i class="fa fa-edit" style="color: #009432; padding-left: 1vh;" aria-hidden="true">
+									</i>
+								</a>
+							</td>
+							<td>
+								<a href="#">
+									<i class="fa fa-trash brisanje_dobavljaca" data-link="/brisanje_dobavljaca/{{ $dobavljac->id }}" style="color: red; padding-left: 2vh;" aria-hidden="true">	
+									</i>
+								</a>
+							</td>
+						</tr>					
 					@endforeach
 				</tbody>
 			</table>

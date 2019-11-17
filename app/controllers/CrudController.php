@@ -27,7 +27,7 @@ class CrudController extends \BaseController {
 		$data->dobavljac_id = dobavljaci::max('id');
 		$data->update();
 
-		Session::flash('success', AdminOptions::lang(195, Session::get("jezik.AdminOptions::server()")));
+		Session::flash('msg', AdminOptions::lang(195, Session::get("jezik.AdminOptions::server()")));
 		return Redirect::to("/admin-welcome");
 	}
 
@@ -315,8 +315,38 @@ class CrudController extends \BaseController {
       	$clanak->update();	      	
 		Session::flash('msg', AdminOptions::lang(266, Session::get('jezik.AdminOptions::server()'))); 
 
-      	return Response::json(array('msg'=>true));
-      	
+      	return Response::json(array('msg'=>true)); 	
+	}
+
+	public function brisanje_dobavljaca($id){
+		dobavljaci::find($id)->delete();
+
+		Session::flash('msg', AdminOptions::lang(278, Session::get('jezik.AdminOptions::server()')) );
+
+		return Redirect::back();
+	}
+
+	public function izmena_dobavljaca($id){
+		
+		return View::make('welcome', array(
+			'pom' => 18, 
+			'id' =>$id
+		));
+	}
+
+	public function izmena_podataka_dobavljaca(){
+
+		$novi_podaci_dobavljaca = dobavljaci::find($_POST['id']);
+		$novi_podaci_dobavljaca->naziv_dobavljaca = Input::get('novo_ime_dobavljaca');
+		$novi_podaci_dobavljaca->adresa = Input::get('adresa');
+		$novi_podaci_dobavljaca->ziro_racun = Input::get('ziro_racun');
+		$novi_podaci_dobavljaca->timestamps = false;
+		$novi_podaci_dobavljaca->update();
+
+		Session::flash('msg', AdminOptions::lang(280, Session::get('jezik.AdminOptions::server()')) );
+
+		return Redirect::to('admin-welcome');
+
 	}
 
 }

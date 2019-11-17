@@ -9,7 +9,7 @@
         <form action="/nova_lozinka" name="nova_lozinka" method="POST" autocomplete="off">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label class="col-sm-6 control-label">
+                    <label class="col-sm-4 control-label" style="margin-left: 100px;">
                         {{ AdminOptions::lang(268, Session::get('jezik.AdminOptions::server()')) }}
                     </label>
                     <div class="col-sm-4">
@@ -17,7 +17,7 @@
                     </div>       
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-6 control-label">
+                    <label class="col-sm-4 control-label" style="margin-left: 100px;">
                         {{ AdminOptions::lang(269, Session::get('jezik.AdminOptions::server()')) }}
                     </label>
                     <div class="col-sm-4">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-6 control-label">
+                    <label class="col-sm-4 control-label" style="margin-left: 100px;">
                         {{ AdminOptions::lang(270, Session::get('jezik.AdminOptions::server()')) }}
                     </label>
                     <div class="col-sm-4">

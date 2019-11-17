@@ -44,7 +44,7 @@
         <a href="{{ AdminOptions::base_url()}}admin-delete-worker/{{ $radnik->id }}" 
         title="{{ AdminOptions::lang(70, Session::get('jezik.AdminOptions::server()')) }}"  
         onclick="return confirm('{{ AdminOptions::lang(44, Session::get('jezik.AdminOptions::server()')) }}');">
-          <i class="fa fa-times" 
+          <i class="fa fa-trash" 
           style="color:red;"                                
           aria-hidden="true">
           </i>
