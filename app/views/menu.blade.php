@@ -426,20 +426,6 @@
                             <b>{{ AdminOptions::lang(198, Session::get('jezik.AdminOptions::server()')) }}</b>
                         </a>
                     </li>
-                    <li>
-                        <a href="/admin-list-group">
-                            <i class="fa fa-eye"  aria-hidden="true"></i>
-                            <b>{{ AdminOptions::lang(97, Session::get('jezik.AdminOptions::server()')) }}</b>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="#" class="novaGrupaProizvoda">
-                                    <i class="fa fa-edit"></i>
-                                    {{ AdminOptions::lang(26, Session::get('jezik.AdminOptions::server()')) }}
-                                </a>
-                            </li>               
-                        </ul>
-                    </li>
                   	<li>
                         <a href="/admin-list-product">
                             <i class="fa fa-eye"></i>
@@ -452,6 +438,20 @@
                                     {{ AdminOptions::lang(27, Session::get('jezik.AdminOptions::server()')) }}
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin-list-group">
+                            <i class="fa fa-eye"  aria-hidden="true"></i>
+                            <b>{{ AdminOptions::lang(97, Session::get('jezik.AdminOptions::server()')) }}</b>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" class="novaGrupaProizvoda">
+                                    <i class="fa fa-edit"></i>
+                                    {{ AdminOptions::lang(26, Session::get('jezik.AdminOptions::server()')) }}
+                                </a>
+                            </li>               
                         </ul>
                     </li>
                     <li>
