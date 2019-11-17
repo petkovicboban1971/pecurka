@@ -392,7 +392,7 @@
                     </li>                    
                 </ul>
             </li>
-            <!-- Proizvodnja -->        
+    <!-- Proizvodnja -->        
             <li>
                 <a href="#">
                     <i class="fa fa-industry"></i>
@@ -405,14 +405,6 @@
                             <i class="fa fa-recycle" aria-hidden="true"></i>
                             <b>{{ AdminOptions::lang(191, Session::get('jezik.AdminOptions::server()')) }}</b>
                         </a>
-                		<ul>
-                  			<li>
-                                <a href="#" class="noviDobavljac">
-                                    <i class="fa fa-edit"></i>
-                                    {{ AdminOptions::lang(192, Session::get('jezik.AdminOptions::server()')) }}
-                                </a>
-                            </li>               
-                		</ul>
                   	</li>
                     <li>
                         <a href="/isplate_dobavljacima" class="Fakture">
@@ -460,6 +452,20 @@
                                     {{ AdminOptions::lang(27, Session::get('jezik.AdminOptions::server()')) }}
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="pregled_dobavljaca">
+                            <i class="fa fa-eye"></i>
+                            <b>{{ AdminOptions::lang(277, Session::get('jezik.AdminOptions::server()')) }}</b>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" class="noviDobavljac">
+                                    <i class="fa fa-edit"></i>
+                                    {{ AdminOptions::lang(192, Session::get('jezik.AdminOptions::server()')) }}
+                                </a>
+                            </li>               
                         </ul>
                     </li>
                 </ul>
@@ -658,6 +664,11 @@
     @include('modals/noviDobavljac')
 </div>
 
+<!--- MODAL PREGLED DOBAVLJACA --->
+<div id="pregled_dobavljaca" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
+    @include('modals/pregled_dobavljaca')
+</div>
+
 <!--- MODAL KOLICINE DOBAVLJACA --->
 <div id="Dobavljaci" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
     @include('modals.upisKolicineDobavljac')
@@ -771,6 +782,10 @@
 
         $(".novaGrupaProizvoda").on("click", function() {
             $("#nova-grupa-proizvoda").modal('show');
+        });  
+
+        $(".pregled_dobavljaca").on("click", function() {
+            $("#pregled_dobavljaca").modal('show');
         }); 
 
         $(".veleMarza").on("click", function() {

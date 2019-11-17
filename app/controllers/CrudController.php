@@ -20,9 +20,11 @@ class CrudController extends \BaseController {
 	public function noviDobavljac(){
 		$data =  new dobavljaci();
 		$data->naziv_dobavljaca = $_POST['noviDobavljac'];
+		$data->adresa = $_POST['adresa'];
+		$data->ziro_racun = $_POST['ziro_racun'];
 		$data->timestamps = false;
 		$data->save();
-		$data->dobavljac_id = DB::table('dobavljaci')->max('id');
+		$data->dobavljac_id = dobavljaci::max('id');
 		$data->update();
 
 		Session::flash('success', AdminOptions::lang(195, Session::get("jezik.AdminOptions::server()")));

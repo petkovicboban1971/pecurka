@@ -1,5 +1,5 @@
 
-<div class="modal-dialog">
+<div class="modal-dialog modal-xs">
   <div class="modal-content">
     <div class="modal-header">
       <h4 class="modal-title">{{ AdminOptions::lang(192, Session::get('jezik.AdminOptions::server()')) }}</h4>
@@ -7,9 +7,21 @@
     <form action='/noviDobavljac' name="noviDobavljac" method="post">
       <div class="modal-body">
         <div class="form-group row">
-          <label class="col-sm-4 control-label">{{ AdminOptions::lang(194, Session::get('jezik.AdminOptions::server()')) }}</label>
-          <div class="col-sm-8">
+          <label class="col-sm-6 control-label" style="text-align: right; padding-left: 10vh !important;">{{ AdminOptions::lang(194, Session::get('jezik.AdminOptions::server()')) }}:</label>
+          <div class="col-sm-6">
             <input type="text" class="form-control input-sm invoice-amt" name="noviDobavljac">
+          </div>        
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6 control-label" style="text-align: right; padding-left: 10vh !important;">{{ AdminOptions::lang(264, Session::get('jezik.AdminOptions::server()')) }}:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control input-sm invoice-amt" name="adresa">
+          </div>        
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6 control-label" style="text-align: right; padding-left: 10vh !important;">{{ AdminOptions::lang(85, Session::get('jezik.AdminOptions::server()')) }}:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control input-sm invoice-amt" name="ziro_racun">
           </div>        
         </div>
       </div>
