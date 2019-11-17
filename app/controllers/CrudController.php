@@ -276,10 +276,9 @@ class CrudController extends \BaseController {
 	public function create_ajax(){
 
 		$clanak = Firma::find(1);
-		if (null == $clanak) {
-		Session::flash('err', AdminOptions::lang(281, Session::get('jezik.AdminOptions::server()')) );
-
-		return Redirect::back();
+		if (empty($clanak)) {
+			Session::flash('err', AdminOptions::lang(281, Session::get('jezik.AdminOptions::server()')) );
+			return Response::json(array('msg'=>false));
 		}
 
 		if (null != Input::file('file')) {

@@ -596,9 +596,15 @@
                     <li>
                         <a href="#" class="podaci_firma"><i class="fa fa-edit"></i>{{ AdminOptions::lang(12, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li>
-                    <li>
-                        <a href="/create-article"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
-                    </li>
+                    @if(null == Firma::find(1))
+                        <li>
+                            <a><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="/create-article"><i class="fa fa-edit"></i>{{ AdminOptions::lang(11, Session::get('jezik.AdminOptions::server()')) }}</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="#" class="nova_lozinka"><i class="fa fa-edit"></i>{{ AdminOptions::lang(13, Session::get('jezik.AdminOptions::server()')) }}</a>
                     </li> 
