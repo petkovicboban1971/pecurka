@@ -21,6 +21,22 @@
                         {{ AdminOptions::lang(269, Session::get('jezik.AdminOptions::server()')) }}
                     </label>
                     <div class="col-sm-4">
+                        <input type="text" class="form-control input-sm cheque-amt" name="kor_ime1" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 control-label" style="margin-left: 100px;">
+                        {{ AdminOptions::lang(270, Session::get('jezik.AdminOptions::server()')) }}
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control input-sm cheque-amt" name="kor_ime2" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 control-label" style="margin-left: 100px;">
+                        {{ AdminOptions::lang(269, Session::get('jezik.AdminOptions::server()')) }}
+                    </label>
+                    <div class="col-sm-4">
                         <input type="password" class="form-control input-sm cheque-amt" name="nova_lozinka1" autocomplete="off" required>
                     </div>
                 </div>
