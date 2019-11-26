@@ -147,7 +147,7 @@ class CrudController extends \BaseController {
 										   ->orWhere('pakovanje', '!=', 0)
 										   ->orderBy('grupa_proizvoda', 'ASC')
 										   ->get();
-		$sema = DB::table('kolicinedobavljaca')->orderBy('id', 'ASC')->get();
+		$sema = kolicinedobavljaca::orderBy('id', 'ASC')->get();
 		return View::make('welcome', array(
 			'pom' => 3, 
 			'dobavljaci' => $dobavljaci, 
@@ -158,7 +158,7 @@ class CrudController extends \BaseController {
 
 	public function isplate_dobavljacima($id=0){
 
-		$dobavljaci = DB::table('dobavljaci')->where('aktivan', 1)->get();
+		$dobavljaci = dobavljaci::where('aktivan', 1)->get();
 		$nacin = vrsta_prodaje::all();
 
 		$pom1 = [];
@@ -169,7 +169,7 @@ class CrudController extends \BaseController {
         }                            
 
 
-			$kupci = DB::table('kupci')->where('aktivan', 1)->get();
+			$kupci = Buyers::where('aktivan', 1)->get();
 			$vrsta_prodaje = vrsta_prodaje::all();
 			$izracunata_isplata = [0];
 			$uplate = [0];
@@ -180,7 +180,7 @@ class CrudController extends \BaseController {
 				$uplate1 = 0;
 				foreach ($vrsta_prodaje as $k2 => $nacin){
 					if($nacin->id == 2){
-						$kupac_uplata[$k1][$k2] = DB::table('kupci_ziralna_uplata')->where('kupac_id', $kupac->id)->sum('iznos');
+						$kupac_uplata[$k1][$k2] = kupci_ziralna_uplata::where('kupac_id', $kupac->id)->sum('iznos');
 					}
 					elseif($nacin->id == 3){
 						$kupac_uplata[$k1][0] = kupci_uplata::uplate_kupca($kupac->id, 3);	 
@@ -324,7 +324,11 @@ class CrudController extends \BaseController {
 	}
 
 	public function brisanje_dobavljaca($id){
-		dobavljaci::find($id)->delete();
+		$dobavljac = dobavljaci::find($id);
+		$dobavljac->aktivan = 0;
+		$dobavljac->timestamps = false;
+		$dobavljac->update();
+
 
 		Session::flash('msg', AdminOptions::lang(278, Session::get('jezik.AdminOptions::server()')) );
 

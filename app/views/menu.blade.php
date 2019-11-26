@@ -119,7 +119,7 @@
                                 if (!empty($dobavljac)) {
                                     $suma1 = kolicinedobavljaca::procenat_iznos($dobavljac->id);
                                     ($suma1 == 0) ? $suma1=1 : $suma1;
-                                    foreach ($dobavljaci as $dobavljac) {                    
+                                    foreach ($dobavljaci as $dobavljac) {           
                                         $pom1 = kolicinedobavljaca::procenat_iznos1($dobavljac->id);
                                         echo "<td style='font-weight:bold; border-top: 2px solid #000; text-align: center !important;'>".number_format($pom1,2,',','.')." ".Firma::valuta()." (".number_format(($pom1/$suma1)*100,2,',','.') ." %)</td>";
                                     }                            
@@ -185,7 +185,7 @@
                             @for($i=0; $i < count($kupci); $i++)
                                 @if(!empty($reversi_zbir[$i]))
                                     @if($reversi_zbir[$i] + $naplaceni_reversi[$i] != 0)
-                                        {{ Buyers::find($reversi[$i])->naziv }} 
+                                        {{ Buyers::find($reversi[$i])->naziv }}: 
                                         {{ number_format(($reversi_zbir[$i] + $naplaceni_reversi[$i]),2,",",".") }} 
                                         {{ Firma::valuta() }}<br>
                                     @endif
@@ -542,10 +542,10 @@
                 <ul>
                     <li>
                         <a href="/obracun_plata" ><i class="fa fa-money"></i><b>{{ AdminOptions::lang(229, Session::get('jezik.AdminOptions::server()')) }}</b></a>
-                    </li>
+                    </li><!-- 
                     <li>
                         <a href="/istorija_obracuna" ><i class="fa fa-history"></i><b>{{ AdminOptions::lang(236, Session::get('jezik.AdminOptions::server()')) }}</b></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="{{ AdminOptions::base_url() }}workers1" ><i class="fa fa-female"></i><b>{{ AdminOptions::lang(69, Session::get('jezik.AdminOptions::server()')) }}</b></a>
                         <ul>

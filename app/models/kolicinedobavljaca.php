@@ -83,7 +83,7 @@
 
     public static function procenat_iznos1($id){
         $zbir2 = 0;
-        $total = DB::table('kolicinedobavljaca')->where('dobavljac', $id)->get();
+        $total = kolicinedobavljaca::where('dobavljac', $id)->get();
         foreach ($total as $value) {
            
             if($value->tezina_pakovanja == 0){

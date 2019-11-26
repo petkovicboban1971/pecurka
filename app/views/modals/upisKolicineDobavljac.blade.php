@@ -10,7 +10,7 @@
 		        		<option value="0" selected disabled>
 		        			{{ AdminOptions::lang(193, Session::get('jezik.AdminOptions::server()')) }}
 		        		</option>
-	        			@foreach(DB::table('dobavljaci')->get() as $dobavljac)
+	        			@foreach(dobavljaci::where('aktivan', 1)->get() as $dobavljac)
 		        			<option value="{{ $dobavljac->id }}">
 		        				{{ $dobavljac->naziv_dobavljaca }}
 		        			</option>

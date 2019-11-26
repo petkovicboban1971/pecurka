@@ -102,7 +102,7 @@ class BuyersController extends \BaseController {
 		$reversi = [];
 		$reversi_zbir = [];
 		$naplaceni_reversi = [];
-		$data = Buyers::where('aktivan', 1)->get();
+		$data = Buyers::where('aktivan', 1)->orderBy('created_at')->get();
 		foreach ($data as $k1 => $kupac) {
 			$suma_revers = 0;
 			$svi_reversi = razduzenjeRadnika::where('kupac', $kupac->id)

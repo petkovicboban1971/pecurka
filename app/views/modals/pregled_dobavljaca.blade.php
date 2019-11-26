@@ -19,7 +19,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(dobavljaci::all() as $dobavljac)
+					@foreach(dobavljaci::where('aktivan', 1)->get() as $dobavljac)
 						<tr>
 							<td>{{ $dobavljac->naziv_dobavljaca }}</td>
 							<td>{{ $dobavljac->adresa }}</td>

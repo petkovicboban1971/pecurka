@@ -6,9 +6,20 @@ class HomeController extends BaseController {
 		return Redirect::to("AdminOptions::findSession('firma', 'web_sajt')");
 	}
 
-	public function showWelcome($id=0){        
-        Session::forget('jezik.AdminOptions::server()');
-        Session::forget('log_sesija.AdminOptions::server()');
+	public function showWelcome($id=0){  
+
+	    if (null !== Session::get('log_sesija'.AdminOptions::server())) {
+			$logout1 = logovi::where('llog', Session::get('log_sesija'.AdminOptions::server()))->orderBy('id', 'DESC')->first();
+			
+			if (null !== $logout1) {
+				$logout = logovi::find($logout1->id);
+				$logout->logout = date('Y-m-d H:i:s');
+				$logout->timestamps = false;
+				$logout->update();
+			}
+	    }
+        Session::forget('jezik'.AdminOptions::server());
+        Session::forget('log_sesija'.AdminOptions::server());
         Session::forget('brojac');
         Session::forget('blink');
         if ($id == 1) {
@@ -64,7 +75,7 @@ class HomeController extends BaseController {
 
 			for ($i=0; $i < count($vrsta_prodaje); $i++) { 
 				$zbir1 = 0;
-				foreach (Buyers::all() as $key => $value) {					
+				foreach (Buyers::where('aktivan', 1)->get() as $key => $value) {					
 					$zbir_nacin[$i] = $zbir1 + $suma[$key][$i];
 					$zbir1 = $zbir_nacin[$i];
 				}
@@ -73,7 +84,7 @@ class HomeController extends BaseController {
 			$isplate = [0];
 				$uplata_dobavljaca_nacin = [];
 				$isplate_dobavljacima = [];
-			$svi_dobavljaci = dobavljaci::all();
+			$svi_dobavljaci = dobavljaci::where('aktivan', 1)->get();
 
 			if(isset($svi_dobavljaci)){
 

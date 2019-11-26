@@ -22,6 +22,9 @@
                                 ->orderBy('created_at', 'DESC')
                                 ->where('created_at', '<', $idb)
                                 ->pluck('cene');
+            if($data12 == null){
+                $data12 = proizvodi::find($ida)->cena_proizvoda;
+            }
         }
     	return $data12;
     }
