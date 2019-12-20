@@ -4,26 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ 'images/pecurka1.png' }}">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
-	 <!-- Latest compiled and minified CSS -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<!-- jQuery library --><!-- 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
-	<!-- Popper JS -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
-
-	<!-- Latest compiled JavaScript --><!-- 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  -->
-
-	<!-- <link rel="stylesheet" type="text/css" href="css/sidebar.css"> -->
-
-    {{ HTML::style('css/sidebar.css') }}<!-- 
-    {{ HTML::script('css/sidebar.css') }} -->
+    {{ HTML::style('css/sidebar.css') }}
 </head>
 <body style='background: url("/images/nature4.jpg"); background-size: cover;
 background-repeat: no-repeat; background-position: center center; 
@@ -45,7 +28,7 @@ background-repeat: no-repeat; background-position: center center;
               
             </li>
             <li class="has-subnav">
-                <a href="/zaduzenje-radnika2">
+                <a href="/zaduzenje_radnika2">
                     <i class="fa fa-user-plus fa-2x"></i>
                     <span class="nav-text">
                         {{ AdminOptions::lang(119, Session::get('jezik.AdminOptions::server()')) }}

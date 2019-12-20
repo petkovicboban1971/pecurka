@@ -9,17 +9,17 @@ class HomeController extends BaseController {
 	public function showWelcome($id=0){  
 
 	    if (null !== Session::get('log_sesija'.AdminOptions::server())) {
-			$logout1 = logovi::where('llog', Session::get('log_sesija'.AdminOptions::server()))->orderBy('id', 'DESC')->first();
+			$logout1 = Logovi::where('llog', Session::get('log_sesija'.AdminOptions::server()))->orderBy('id', 'DESC')->first();
 			
 			if (null !== $logout1) {
-				$logout = logovi::find($logout1->id);
+				$logout = Logovi::find($logout1->id);
 				$logout->logout = date('Y-m-d H:i:s');
 				$logout->timestamps = false;
 				$logout->update();
 			}
 	    }
-        Session::forget('jezik'.AdminOptions::server());
-        Session::forget('log_sesija'.AdminOptions::server());
+        Session::forget('jezik.AdminOptions::server()');
+        Session::forget('log_sesija.AdminOptions::server()');
         Session::forget('brojac');
         Session::forget('blink');
         if ($id == 1) {

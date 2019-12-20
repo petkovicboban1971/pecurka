@@ -377,13 +377,32 @@ height: 100%;
 }
 .sviRadnici{
     position: relative;
-    background-color: #fff; 
-    margin: 73px 25px 35px 275px;
+    width: 950px !important;
+    /*height: 100%;*/
+    background-color: #fff;
+    display: inline-flex; 
+    margin: 80px 25px 35px 250px;
     padding: 15px;
     border: 1px solid gray;
     border-radius: 10px;
     -moz-border-radius: 10px;
     box-shadow: 0px 5px 5px 0px;
+}
+.sviRadnici select, input{
+    padding-left: 0px !important;
+    font-size: 12pt !important;
+    margin: 20px 10px !important;
+    width: 200px !important;
+    height: 35px !important;
+    border: 1px solid gray;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow: 0px 5px 5px 0px;
+}
+.sviRadnici .dugme{
+    position: relative;
+    top: 25px;
+    height: 30px;
 }
 .sviRadnici a{
     display: inline-flex; 

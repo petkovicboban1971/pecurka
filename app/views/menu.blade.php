@@ -35,35 +35,53 @@
     <div class="grafikon">    
         <ul class="chart">
             <li>
-                <a href="/glavniMagacin" class="btn btn-default" style="width: 150px; font-size: 11pt; " >{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
-                </a>&nbsp;&nbsp;
-                <a href="/stanjeMagacina?magacin=1&choise=-1" class="btn btn-default" style="width: 150px; font-size: 11pt; ">{{ AdminOptions::lang(165, Session::get('jezik.AdminOptions::server()')) }}
+                @if(isset($choise) && $choise == -1)
+                    <a href="/glavniMagacin" class="btn btn-default" style="width: 150px; font-size: 11pt; background-color: #e44e4e; border: 1px solid gray;">{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
+                    </a>&nbsp;&nbsp;
+                @else
+                    <a href="/glavniMagacin" class="btn btn-default" style="width: 150px; font-size: 11pt;">{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
+                    </a>&nbsp;&nbsp;
+                @endif
+
+                @foreach(magacini::where('aktivan', 1)->get() as $magacin)
+                    @if(isset($choise) && $choise == $magacin->id)                        
+                        <a href="/stanjeMagacina?magacin={{$magacin->id}}&choise={{-$magacin->id}}" class="btn btn-default" style="width: 150px; font-size: 11pt; background-color: #e44e4e; border: 1px solid gray;">{{ $magacin->naziv }}
+                        </a>
+                    @else
+                        <a href="/stanjeMagacina?magacin={{$magacin->id}}&choise={{-$magacin->id}}" class="btn btn-default" style="width: 150px; font-size: 11pt;">{{ $magacin->naziv }}
+                        </a>
+                    @endif
+                @endforeach
+
+                <!-- <a href="/stanjeMagacina?magacin=1&choise=-1" class="btn btn-default" style="width: 150px; font-size: 11pt; ">{{ AdminOptions::lang(165, Session::get('jezik.AdminOptions::server()')) }}
                 </a>
                 &nbsp;&nbsp;
                 <a href="/stanjeMagacina?magacin=2&choise=-2" class="btn btn-default" style="width: 150px; font-size: 11pt; ">{{ AdminOptions::lang(171, Session::get('jezik.AdminOptions::server()')) }}
-                </a>
+                </a> -->
             </li><br>                          
             <!-- <li class="current" title="Label 1"><span class="bar" data-number="38000"></span><span class="number">38,000</span></li> -->
             @if(!empty($data1))
-                @foreach($data1 as $vrednost)
-                    @if(proizvodi::find($vrednost->id)->kolicina_proizvoda != 0)
-                        <li style="font-weight: bold;" class="past" title="{{ $vrednost->naziv_proizvoda }}">             
+                @foreach($data1 as $key => $vrednost)
+                    
+                        <li style="font-weight: bold;" class="past" title="{{ $vrednost->naziv_proizvoda }} ({{
+                            proizvodi::find($vrednost->id)->tezina_pakovanja == 0 ?
+                            proizvodi::find($vrednost->id)->kolicina_proizvoda : proizvodi::find($vrednost->id)->pakovanje}})">             
                             @if($vrednost->tezina_pakovanja == 0)
-                                <span class="bar" data-number="{{ $vrednost->kolicina_proizvoda < 5 ? $vrednost->kolicina_proizvoda : log($vrednost->kolicina_proizvoda) }}"></span>
-                                <span class="number">{{ $vrednost->kolicina_proizvoda }}&nbsp;kg</span>
+                                <span class="bar" data-number="{{ $lager[$key] < 5 ? $lager[$key] : log($lager[$key]) }}"></span>
+                                <span class="number">{{ $lager[$key] }}&nbsp;kg</span>
                             @else
-                                <span class="bar" data-number="{{ $vrednost->pakovanje * $vrednost->tezina_pakovanja > 2 ? log(($vrednost->pakovanje * $vrednost->tezina_pakovanja)/2) : $vrednost->pakovanje * $vrednost->tezina_pakovanja }}"></span>
-                                <span class="number">{{ $vrednost->pakovanje }}&nbsp;{{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</span>
+                                <span class="bar" data-number="{{ ($lager[$key]) * $vrednost->tezina_pakovanja > 2 ? log((($lager[$key]) * $vrednost->tezina_pakovanja/2)) : ($lager[$key]) * $vrednost->tezina_pakovanja }}"></span>
+                                <span class="number">{{ $lager[$key] }}&nbsp;{{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</span>
                             @endif
                         </li>
-                    @endif
+                    
                 @endforeach
             @else
                 @if(!empty($data))
-                    @for($i=0; $i < count($unikat_proizvod); $i++)
-                        <li style="font-weight: bold;" class="past" title="{{ proizvodi::find($unikat_proizvod[$i]->proizvod)->naziv_proizvoda }}">
+                    @for($i=0; $i < count($magacini); $i++)
+                        <li style="font-weight: bold;" class="past" title="{{ proizvodi::find($magacini[$i]->proizvod)->naziv_proizvoda }}">
                             <span class="bar" data-number="{{ $zbir_proizvoda[$i] >1 ? log($zbir_proizvoda[$i]) : 1 }}"></span>
-                            @if(proizvodi::find($unikat_proizvod[$i]->proizvod)->pakovanje == 0)
+                            @if(proizvodi::find($magacini[$i]->proizvod)->pakovanje == 0)
                                 <span class="number">{{ $zbir_proizvoda[$i] }}&nbsp;kg</span>
                             @else
                                 <span class="number">{{ $zbir_proizvoda[$i] }}&nbsp;{{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</span>
@@ -322,6 +340,10 @@
             @if(!empty($pom) && $pom == 18)
                 @include('izmena_dobavljaci')
             @endif
+<!-- Kreiranje novog / izmena magacina -->
+            @if(!empty($pom) && $pom == 19)
+                @include('magacin')
+            @endif
         </ul>
     </div>
 
@@ -574,14 +596,26 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="novaStavka" >
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                            <b>{{ AdminOptions::lang(14, Session::get('jezik.AdminOptions::server()')) }}</b>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ AdminOptions::base_url() }}workers2" ><i class="fa fa-eye"></i><b>{{ AdminOptions::lang(15, Session::get('jezik.AdminOptions::server()')) }}</b>
                         </a>
+                        <ul>                            
+                            <li>
+                                <a href="#" class="novaStavka" >
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                    <b>{{ AdminOptions::lang(14, Session::get('jezik.AdminOptions::server()')) }}</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/magacini"><i class="fa fa-eye"></i><b>{{ AdminOptions::lang(153, Session::get('jezik.AdminOptions::server()')) }}</b>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" class="novi_magacin"><i class="fa fa-edit"></i><b>{{ AdminOptions::lang(152, Session::get('jezik.AdminOptions::server()')) }}</b>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
@@ -717,6 +751,11 @@
 <!--- MODAL NOVA LOZINKA --->
 <div id="nova_lozinka" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
     @include('modals/nova_lozinka')
+</div>
+
+<!--- MODAL novi_magacin --->
+<div id="novi_magacin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
+    @include('modals/unosNovogMagacina')
 </div>
 
 
@@ -901,6 +940,12 @@
             $(".potvrda_uplate").removeAttr("disabled");         
         });
 
+        $('.novi_magacin').click(function(e){
+            e.preventDefault(); 
+            $("#novi_magacin").modal('show');   
+
+        });
+
         var checkbox = $('input[type="checkbox"]');
         $("#checkbox2").click(function(){
             if(this.checked){
@@ -930,7 +975,7 @@
                     $modal.find('.edit-content').html(esseyId);
 //                }
 //            });            
-        })
+        });
     });
     $("#izmena_dobavljaca").modal('show');
 </script>

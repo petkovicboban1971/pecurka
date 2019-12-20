@@ -1,182 +1,126 @@
-
+<!DOCTYPE html>
+<html>
 <head>
-  	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script><!-- 
-	<script src="js/jquery-3.4.1.js"></script> -->
-
-	<script type="text/javascript">      
-        $(document).ready(function() {
-	        $("#submit_button").click(function() {
-		        $.post('/privremena-tabela',
-		        	{ 
-		        	  proizvod_id: $(this).data('id'),
-		        	  radnik: $("#selection1 option:selected").val(),
-		        	  kupac: $("#selection2 option:selected").val(),
-		        	  Kolicina: $(this).val(),
-		        	  Cena: $(this).val(),
-		        	  zarRad: $(this).val() 
-		        	},
-	           		function (response) {
-		              	location.href="/";
-		            });
-		  	});
-
-	        $("#selection1" && "#selection2").change(function(){
-
-		        	$.post('/privremena-tabela',
-			        	{ 
-			        	  radnik: $("#selection1 option:selected").val(),
-			        	  kupac: $("#selection2 option:selected").val()
-			        	});
-	        });
-
-
-		  	$("#upisi").on('click', function(e){
-		  		e.preventDefault();
-		  		$.post('/privremena-tabela1',
-		        	{
-		        	  	product: $(e).data('product')			    		
-		        	},
-		        	function(){
-        			});
-		  		console.log(product);
-		  	});
-
-		  	$('#upisKolicineModal').on('show.bs.modal', function(e) {
-			    var Id = $(e.relatedTarget).data('id');
-			    $(e.currentTarget).find('input[name="Id"]').val(Id);
-			    var Product = $(e.relatedTarget).data('product');
-			    $(e.currentTarget).find('input[name="Product"]').val(Product);
-			});
-    
-    		$('#potvrdaKupac').click(function(){
-    			$("#potvrdaKupacModal").modal('show');
-    		})
-            
-	    });		
-	</script>
-
+	<title></title>
 	<style type="text/css">
-		select{
-			width: 220px;
-			text-align: center;	
-			border: 2px solid #f2f2f2;
-		  	border-radius: 4px ;
-		  	-webkit-border-radius: 4px ;
-		  	-moz-border-radius: 4px ;
+		html { overflow-y: scroll; }
+		body { 
+		  line-height: .5;
 		}
-		button{
-			width: 120px;
-			/*box-shadow: 5px;*/
-			/*margin: 5px;*/
+		#main {
+			width: 500px;
+			padding: 0px;/*
+			margin: 3px;*/
 		}
-		
-	</style>
 
+		table.timecard {
+			margin: auto;
+			width: 600px;
+			border-collapse: collapse;
+			border: 1px solid #fff; /*for older IE*/
+			border-style: hidden;
+		}
+
+		table.timecard caption {
+			background-color: #cc0000;
+			color: #fff;
+			font-size: x-large;
+			padding: 8px;
+		}
+
+		table.timecard thead th {
+			padding: 8px;
+			background-color: white;
+			font-size: large;
+		}
+
+		table.timecard thead th#thDay {
+			width: 20%;	
+		}
+
+		table.timecard thead th#thRegular, table.timecard thead th#thOvertime, table.timecard thead th#thTotal {
+			width: auto;
+		}
+
+		table.timecard th, table.timecard td {
+			padding: 3px;
+			border-width: 1px;
+			border-style: solid;
+			/*border-color: #f79646 #ccc;*/
+		}
+
+		table.timecard td {
+			text-align: right;
+		}
+
+		table.timecard tbody th {
+			text-align: left;
+			font-weight: normal;
+		}
+
+		table.timecard tfoot {
+			font-weight: bold;
+			font-size: large;
+			background-color: #b6b8ba;
+			color: #fff;
+		}
+
+		table.timecard tr.even {
+			background-color: #fde9d9;
+		}
+		button {
+			width: 180px;
+		}
+		th a {
+			color: #cc0000;
+		}
+		th a:hover {
+			color: red;
+		}
+	</style>
 </head>
 <body>
-<?php $text = AdminOptions::lang(119, Session::get('jezik.AdminOptions::server()')); ?>
-@include('pages/home')
-<?php $pom = veza::where('magacin', 1)->get(); 
-	//var_dump($pom);die();
+	@include('pages.home')
+	<div id="main-pregRad">
+		<div style="margin-top: 75px;">
+			<div id="main">
+				<table class="timecard">
+					<thead>
+						<tr>
+							<th id="thDay">{{ AdminOptions::lang(81, Session::get('jezik.AdminOptions::server()')) }}:</th>
+							<th id="thRegular">{{ AdminOptions::lang(141, Session::get('jezik.AdminOptions::server()')) }}:</th>
+							<th id="thOvertime"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>{{ Radnici::find($radnik)->ime }} {{ Radnici::find($radnik)->prezime }}</th>
+							@foreach($data2 as $data1)
+								<th><a href="/faktura-posebno/{{ $data1->kupac_id }}/{{ $data1->radnik_id }}">{{ Buyers::find($data1->kupac_id)->naziv }}</a></th>
+							@endforeach
+						</tr>
 
-	//print_r(veza::find(8)->radnik); die();
-
-//for($i=0; $i < count($pom); $i++){
-		/*foreach($pom[$i]-> as $mmm){
-			echo $mmm->ime;
-		}*/
-		foreach ($pom as $value) {
-					
-			echo Radnici::find($value->radnik)->ime;
-			echo proizvodi::find($value->proizvod)->naziv_proizvoda;
-			echo veza::find($value->id)->kolicina;
-		}
-	//}
-?>
-
-<div id="main-zadRad">	
-	<!-- @if (Session::has('Message'))
-		<center>
-			<div class="alert alert-success" style="width: 250px;">{{ Session::get('Message') }}</div>
-		</center>
-	@endif -->
-	@if(empty($dataa1))
-		<?php 
-			if(empty($radnik_id)){
-				$izabraniRadnik = AdminOptions::lang(115, Session::get('jezik.AdminOptions::server()')).":";
-				$vrednost = 0;
-			}
-			else{
-				$izabraniRadnik = Radnici::find($radnik_id)->ime." ".Radnici::find($radnik_id)->prezime;
-				$vrednost = $radnik_id;
-			}
-		?>
-		<form method="post">
-			<div style="padding: 25px 0 0 530px; font-size: 18pt;">				
-				<div class="form-group row">
-					<select id="selection1" class="form-group row" autocomplete="off">
-						<option value="{{ $vrednost }}" selected> {{ $izabraniRadnik }}</option>
-						@foreach(DB::table('radnici')->get() as $radnik)
-						  	<option value="{{ $radnik->id }}">{{ $radnik->ime }} {{ $radnik->prezime }}</option>
-						@endforeach
-					</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				
-					<select id="selection2" class="form-group row" autocomplete="off">
-						<option value="0" selected>{{ AdminOptions::lang(116, Session::get('jezik.AdminOptions::server()')) }}:</option>
-						@foreach(DB::table('kupci')->get() as $kupac)
-						  	<option value="{{ $kupac->id }}">{{ $kupac->naziv }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</form>
-	@else
-		<br>
-		<div id="radnik-kupac">
-			<u><b>Radnik:</b> {{ Radnici::find(Privremena_tabela::radnik())->ime }} {{ Radnici::find(Privremena_tabela::radnik())->prezime }}</u>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			<u><b>Kupac:</b> {{ Buyers::find(Privremena_tabela::kupac())->naziv }}</u>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>{{ AdminOptions::lang(142, Session::get('jezik.AdminOptions::server()')) }}:</th>
+							<?php $sumaZaduzenja = 0; ?>
+							@foreach($data2 as $key => $dataa)	
+								<?php $sumaZaduzenja1 = 0; ?>
+								@foreach ($data3[$key] as $data5) 
+									<?php
+										$sumaZaduzenja1 = $data5->kolicina * $data5->cena + 
+										$sumaZaduzenja1;
+									?>
+								@endforeach								
+								<td style="padding: 8px;">{{ number_format($sumaZaduzenja1,2,",",".") }} {{ Firma::valuta() }}</td>
+								<?php $sumaZaduzenja = $sumaZaduzenja + $sumaZaduzenja1; ?>
+							@endforeach	
+						</tr>
+					</tfoot>
+					<caption><div style="float: right; padding: 8px;">{{ AdminOptions::lang(143, Session::get('jezik.AdminOptions::server()')) }}: {{ number_format($sumaZaduzenja,2,",",".") }} {{ Firma::valuta() }}</div></caption>
+				</table>
 		</div>
-		<br>
-	@endif
-	<div class="table-responsive table-hover">
-		<table id="myTable" class="table table-sm" style="max-width: 79%; float: right; table-layout: fixed;">
-		  	<thead>
-			    <tr style="text-align: center;">
-					<th style="padding:10px;">{{ AdminOptions::lang(104, Session::get('jezik.AdminOptions::server()')) }}</th>
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr>
-		  	</thead>
-		  	<tbody >
-			    @foreach(DB::table('grupa_proizvoda')->get() as $key1 => $grupa)
-					<td><h5><b>{{ $grupa->naziv_grupe }}</b></h5></td>
-					@foreach(DB::table('proizvodi')->get() as $proizvod)
-			    		@if($grupa->grupa_id == $proizvod->grupa_proizvoda)			    			
-				    		<tr style="text-align: center;">
-				    			<td style="border-right: 3px solid #f2f2f2;">
-				    				<button id="upisi" data-id="{{ cene_datumi::where('proizvod_id', $proizvod->id)->cene }}" data-product="{{ $proizvod->id }}" data-target="#upisKolicineModal" data-toggle="modal" class="btn btn-danger" style="float: right; margin-right: 30px;" >{{ $proizvod->naziv_proizvoda }}</button>
-				    			</td>				    							    			
-							</tr>																
-						@endif
-					@endforeach
-				@endforeach		
-			</tbody>				
-		</table>
-		@include('pages.tabela')
-	</div>
-</div>
-
-<div id="upisKolicineModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
-	@include('modals/live/upisKolicineModal')
-</div> 
-<div id="potvrdaKupacModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
-	@include('modals/live/potvrdaKupacModal')
-</div> 
+	</div>	
 </body>
 </html>

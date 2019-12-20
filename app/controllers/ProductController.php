@@ -112,7 +112,7 @@ class ProductController extends \BaseController {
 
 	public function stanjeMagacina(){	
 
-		$magacini = veza::where('magacin', $_GET['magacin'])->get();
+		/*$magacini = veza::where('magacin', $_GET['magacin'])->get();
 		$pom = 2;
 		if (empty($magacini)) {
 			$pom = 1;
@@ -130,18 +130,40 @@ class ProductController extends \BaseController {
 				$zbir0 = $zbir0 + proizvodi::odluka_brojcano($value->kolicina, $value->pakovanje);
 			}
 			$zbir_proizvoda[$i] = $zbir0; 
+		}*/
+
+		$magacini = proizvod_magacin::where('magacin', $_GET['magacin'])->get();
+		$pom = 2;
+		if (empty($magacini)) {
+			$pom = 1;
+		}
+		$zbir = [];
+		$zbir_proizvoda = [];
+		foreach ($magacini as $key => $magacin){
+			$zbir0 = 0; 
+			$zbir[$key] = proizvod_magacin::where('magacin', $_GET['magacin'])
+							->where('proizvod', $magacin->proizvod)
+							->get();
+			foreach($zbir[$key] as $value){
+				$zbir0 = $zbir0 + proizvodi::odluka_brojcano($value->kolicina, $value->pakovanje);
+			}
+			$zbir_proizvoda[$key] = $zbir0; 
+			
 		}
 
 		if (isset($_GET['choise'])){
 
 			return View::make('welcome', array(
+				'choise' => $_GET['magacin'],
 				'data' => $magacini,
-				'unikat_proizvod' => $unikat_proizvod,
+				'magacini' => $magacini,
+				/*'unikat_proizvod' => $unikat_proizvod,*/
 				'zbir_proizvoda' => $zbir_proizvoda,
 			 	'pom' => $pom
 			));
 		}
 		return View::make('pages.home', array(
+				'choise' => $_GET['magacin'],
 				'data' => $magacini,
 				'unikat_proizvod' => $unikat_proizvod,
 				'zbir_proizvoda' => $zbir_proizvoda,
@@ -152,23 +174,29 @@ class ProductController extends \BaseController {
 
 	public function glavniMagacin(){
 		$data1 = [];
-		$veza = [];
+		$proizvod_magacin = [];
+		$proizvod_lager = [];
+		$lager = [];
 		$data = proizvodi::where('aktivan', 1)->orderBy('grupa_proizvoda', 'ASC')->get();
 		foreach ($data as $key => $data2) {
 			if($data2->pakovanje == 0){
-				$veza[$key] = veza::where('proizvod', $data2->id)->sum('kolicina');
-				$data1[$key] = ABS($data2->kolicina_proizvoda - $veza[$key]);
+				$proizvod_magacin[$key] = proizvod_magacin::where('proizvod', $data2->id)->sum('kolicina');
+				$proizvod_lager[$key] = $data2->kolicina_proizvoda;
 			}
 			else{
-				$veza[$key] = veza::where('proizvod', $data2->id)->sum('pakovanje');
-				$data1[$key] = ABS($data2->pakovanje - $veza[$key]);
-
+				$proizvod_magacin[$key] = intval(proizvod_magacin::where('proizvod', $data2->id)->sum('pakovanje'));
+				$proizvod_lager[$key] = $data2->pakovanje;
+				/*var_dump($proizvod_magacin);
+				echo"<br>";
+				var_dump($proizvod_lager);die();*/
 			}
+			$lager[$key] = $proizvod_magacin[$key] + $proizvod_lager[$key];
 		}
-		//var_dump($data1);die();
+		//var_dump($lager);die();
 		return View::make('welcome', array(
-			'data1' => $data, 
-			'razlika' => $data1
+			'data1' => $data,
+			'choise' => -1, 
+			'lager' => $lager
 		));
 	}
 

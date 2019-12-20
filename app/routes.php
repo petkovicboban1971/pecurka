@@ -11,6 +11,9 @@ Route::get('/home', 'HomeController@home');
 Route::get('/zaduzenje-radnika', 'ZaduzenjeController@zaduzenje_radnika');
 Route::get('/zaduzenje-radnika1', 'ZaduzenjeController@zaduzenje_radnika1');
 Route::get('/zaduzenje-radnika2', 'ZaduzenjeController@zaduzenjeRadnika2');
+Route::get('/zaduzenje_radnika2', 'LiveController@zaduzenje_radnika2');
+Route::post('/zaduzenje_radnika3', 'LiveController@zaduzenje_radnika3');
+Route::get('/zaduzenje_radnika23', 'LiveController@zaduzenje_radnika23');
 Route::get('/zaduzeniRadnik3/{id}', 'ZaduzenjeController@zaduzenjeRadnika3');
 Route::get('/zaduzeniRadnik31/{id}', 'ZaduzenjeController@zaduzenjeRadnika31');
 Route::post('/zaduzeniRadnik4', 'ZaduzenjeController@zaduzenjeRadnika4');
@@ -66,6 +69,12 @@ Route::post('/admin-save-item', 'CrudController@store');
 Route::get('/admin-delete-item/{id?}', 'CrudController@destroy');
 Route::post('/admin-edit-item/{id?}', 'CrudController@edit');
 Route::get('/admin-find-item/{id}', 'CrudController@finding');
+Route::get('/magacini', 'CrudController@magacini');
+Route::get('/magacin_edit/{id}', 'CrudController@magacin_edit');
+Route::post('/magacin_edit1', 'CrudController@magacin_edit1');
+Route::get('/magacin_delete/{id}', 'CrudController@magacin_delete');
+Route::post('/novi_magacin', 'CrudController@novi_magacin');
+Route::post('/razmena', 'CrudController@razmena');
 Route::post('/admin-update-item/{id?}', 'CrudController@update');
 
 // radnici

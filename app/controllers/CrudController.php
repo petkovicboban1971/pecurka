@@ -358,4 +358,177 @@ class CrudController extends \BaseController {
 
 	}
 
+	public function novi_magacin(){
+		$magacini_id = magacini::max('id')+1;
+		$novi_magacin = new Magacini;
+		$novi_magacin->id = $magacini_id;
+		$novi_magacin->naziv = Input::get('NoviMagacin');
+		$novi_magacin->created_at = date("Y-m-d");
+		$novi_magacin->save();
+		Session::flash('msg', AdminOptions::lang(155, Session::get('jezik.AdminOptions::server()')) );
+		return View::make('welcome');
+	}
+
+	public function magacini(){
+		$magacini = magacini::where('aktivan', 1)->get();
+		$proizvodi = proizvodi::where('aktivan', 1)->get();
+		$proizvod_magacin = proizvod_magacin::orderBy('proizvod', 'ASC')->get();
+		return View::make('welcome', array(
+			'magacini' => $magacini, 
+			'proizvodi' => $proizvodi, 
+			'proizvod_magacin' => $proizvod_magacin, 
+			'pom' => 19
+		));
+	}
+
+	public function magacin_edit($id){
+		$magacin = magacini::find($id);
+        return Response::json(['result' => $magacin]);
+	}
+
+	public function magacin_edit1(){
+		$data = magacini::find($_POST['magacin_id']);
+		$data->naziv = $_POST['NoviNazivMagacina'];
+		$data->update();
+		Session::flash('msg', AdminOptions::lang(286, Session::get('jezik.AdminOptions::server()')) );
+		return Redirect::back();
+	}
+	
+	public function magacin_delete($id){
+		$proizvod_magacin = proizvod_magacin::where('magacin', $id)->get();
+		if (!empty($proizvod_magacin)) {			
+			Session::flash('err', AdminOptions::lang(291, Session::get('jezik.AdminOptions::server()')) );
+			return Redirect::back();
+		}
+		$data = magacini::find($id);
+		$data->aktivan = 0;
+		$data->update();
+		Session::flash('msg', AdminOptions::lang(287, Session::get('jezik.AdminOptions::server()')) );
+		return Redirect::back();
+	}
+
+	public function razmena(){
+		if($_POST['magacin1'] == $_POST['magacin2']){
+			$poruka =  AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'));
+			Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+			
+			return Response::json(['result' => $poruka]);
+		}
+		if ($_POST['magacin1'] == -1) {
+			$data = proizvodi::find($_POST['proizvod']);
+			if($data->pakovanje == 0){
+				if ($data->kolicina_proizvoda < $_POST['kolicina']) {      	
+		Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'))); 
+
+      	return Response::json(array('success'=>true)); 
+				}
+				$data->kolicina_proizvoda = $data->kolicina_proizvoda - $_POST['kolicina'];
+			}
+			else{
+				if ($data->pakovanje < $_POST['kolicina']) {				
+					Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'))); 
+
+      	return Response::json(array('success'=>true)); 
+				}
+				$data->pakovanje = $data->pakovanje - $_POST['kolicina'];
+			}
+			$data->update();
+
+			$data1 = proizvod_magacin::where('proizvod', $_POST['proizvod'])->where('magacin', $_POST['magacin2'])->first();
+			if(null == $data1){
+				$proizvod_magacin = new proizvod_magacin;
+				$proizvod_magacin->proizvod = $_POST['proizvod'];
+				$proizvod_magacin->magacin = $_POST['magacin2'];
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					$proizvod_magacin->kolicina = $_POST['kolicina'];
+				}
+				else{
+					$proizvod_magacin->pakovanje = $_POST['kolicina'];
+				}
+				$proizvod_magacin->created_at = date('Y-m-d');
+				$proizvod_magacin->save();
+
+				Session::flash('msg', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+			}
+			else{
+				$data2 = proizvod_magacin::find($data1->id);
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					$data2->kolicina = $data2->kolicina + $_POST['kolicina'];
+				}
+				else{
+					$data2->pakovanje = $data2->pakovanje + $_POST['kolicina'];
+				}
+				$data2->created_at = date('Y-m-d');
+				$data2->save();
+			}
+		}
+		else{
+			$magacin1 = proizvod_magacin::where('magacin', $_POST['magacin1'])->where('proizvod', $_POST['proizvod'])->first();
+			if(null != $magacin1){
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					if ($magacin1->kolicina < $_POST['kolicina']) {
+						Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+						return Response::json(['result' => $magacin1]);
+					}
+					$magacin1->kolicina = $magacin1->kolicina - $_POST['kolicina'];
+				}
+				else{
+					if ($magacin1->pakovanje < $_POST['kolicina']) {
+						Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+						return Response::json(['result' => $magacin1]);
+					}
+					$magacin1->pakovanje = $magacin1->pakovanje - $_POST['kolicina'];
+					if ($magacin1->pakovanje < $_POST['kolicina']) {
+						Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+						return Response::json(['result' => $magacin1]);
+					}
+				}
+				$magacin1->created_at = date('Y-m-d');
+				$magacin1->update();
+			}
+			else{
+				Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
+			
+				return Response::json(['result' => $magacin1]);
+				/*$magacin1 = new proizvod_magacin;
+				$magacin1->proizvod = $_POST['proizvod'];
+				$magacin1->magacin = $_POST['magacin1'];
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					$magacin1->kolicina = $_POST['kolicina'];
+				}
+				else{
+					$magacin1->pakovanje = $_POST['kolicina'];
+				}
+				$magacin1->created_at = date('Y-m-d');
+				$magacin1->save();*/
+
+			}
+
+			$magacin2 = proizvod_magacin::where('magacin', $_POST['magacin2'])->where('proizvod', $_POST['proizvod'])->first();
+			if(null != $magacin2){
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					$magacin2->kolicina = $magacin2->kolicina + $_POST['kolicina'];
+				}
+				else{
+					$magacin2->pakovanje = $magacin2->pakovanje + $_POST['kolicina'];
+				}
+				$magacin2->created_at = date('Y-m-d');
+				$magacin2->update();
+			}
+			else{
+				$magacin2 = new proizvod_magacin;
+				$magacin2->proizvod = $_POST['proizvod'];
+				$magacin2->magacin = $_POST['magacin2'];
+				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+					$magacin2->kolicina = $_POST['kolicina'];
+				}
+				else{
+					$magacin2->pakovanje = $_POST['kolicina'];
+				}
+				$magacin2->created_at = date('Y-m-d');
+				$magacin2->save();
+			}
+		}
+		
+	}
 }

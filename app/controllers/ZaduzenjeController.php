@@ -4,7 +4,18 @@ class ZaduzenjeController extends \BaseController{
 
 	public function zaduzenje_radnika(){
 		
-		return View::make('pages.zaduzenjeRadnika');
+		$radnici = DB::table('radnici')->where('aktivan', 1)
+									   ->orderBy('prezime', 'ASC')
+									   ->orderBy('ime', 'ASC')
+									   ->get();
+		$prethodnoZaduzeni = veza::all();
+		return View::make('pages.zaduzeniRadnik', array(
+			'opcija' => 1, 
+			'text' => AdminOptions::lang(115, Session::get('jezik.AdminOptions::server()')), 
+			'izbor' => 2, 
+			'prethodnoZaduzeni' => $prethodnoZaduzeni, 
+			'radnici' => $radnici
+		));
 	}
 
 	public function zaduzenjeRadnika2(){
