@@ -73,6 +73,7 @@ Route::get('/magacini', 'CrudController@magacini');
 Route::get('/magacin_edit/{id}', 'CrudController@magacin_edit');
 Route::post('/magacin_edit1', 'CrudController@magacin_edit1');
 Route::get('/magacin_delete/{id}', 'CrudController@magacin_delete');
+Route::get('/magacin_ajax/{id}', 'CrudController@magacin_ajax');
 Route::post('/novi_magacin', 'CrudController@novi_magacin');
 Route::post('/razmena', 'CrudController@razmena');
 Route::post('/admin-update-item/{id?}', 'CrudController@update');

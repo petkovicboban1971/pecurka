@@ -70,7 +70,7 @@
                                 <span class="bar" data-number="{{ $lager[$key] < 5 ? $lager[$key] : log($lager[$key]) }}"></span>
                                 <span class="number">{{ $lager[$key] }}&nbsp;kg</span>
                             @else
-                                <span class="bar" data-number="{{ ($lager[$key]) * $vrednost->tezina_pakovanja > 2 ? log((($lager[$key]) * $vrednost->tezina_pakovanja/2)) : ($lager[$key]) * $vrednost->tezina_pakovanja }}"></span>
+                                <span class="bar" data-number="{{ ($lager[$key]) * $vrednost->tezina_pakovanja > 2 ? log((($lager[$key]) * $vrednost->tezina_pakovanja/2 + .5)) : ($lager[$key]) * $vrednost->tezina_pakovanja + 1 }}"></span>
                                 <span class="number">{{ $lager[$key] }}&nbsp;{{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</span>
                             @endif
                         </li>
@@ -81,7 +81,7 @@
                     @for($i=0; $i < count($magacini); $i++)
                         <li style="font-weight: bold;" class="past" title="{{ proizvodi::find($magacini[$i]->proizvod)->naziv_proizvoda }}">
                             <span class="bar" data-number="{{ $zbir_proizvoda[$i] >1 ? log($zbir_proizvoda[$i]) : 1 }}"></span>
-                            @if(proizvodi::find($magacini[$i]->proizvod)->pakovanje == 0)
+                            @if(proizvodi::find($magacini[$i]->proizvod)->tezina_pakovanja == 0)
                                 <span class="number">{{ $zbir_proizvoda[$i] }}&nbsp;kg</span>
                             @else
                                 <span class="number">{{ $zbir_proizvoda[$i] }}&nbsp;{{ AdminOptions::lang(211, Session::get('jezik.AdminOptions::server()')) }}</span>

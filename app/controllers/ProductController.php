@@ -179,12 +179,12 @@ class ProductController extends \BaseController {
 		$lager = [];
 		$data = proizvodi::where('aktivan', 1)->orderBy('grupa_proizvoda', 'ASC')->get();
 		foreach ($data as $key => $data2) {
-			if($data2->pakovanje == 0){
+			if($data2->tezina_pakovanja == 0){
 				$proizvod_magacin[$key] = proizvod_magacin::where('proizvod', $data2->id)->sum('kolicina');
 				$proizvod_lager[$key] = $data2->kolicina_proizvoda;
 			}
 			else{
-				$proizvod_magacin[$key] = intval(proizvod_magacin::where('proizvod', $data2->id)->sum('pakovanje'));
+				$proizvod_magacin[$key] = proizvod_magacin::where('proizvod', $data2->id)->sum('pakovanje');
 				$proizvod_lager[$key] = $data2->pakovanje;
 				/*var_dump($proizvod_magacin);
 				echo"<br>";

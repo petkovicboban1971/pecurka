@@ -49,7 +49,7 @@ class CrudController extends \BaseController {
 		$data = new kolicinedobavljaca();
 		$data->dobavljac = $_POST['dobavljac'];
 		$data->proizvod = $_POST['proizvod'];
-		if(proizvodi::find($_POST['proizvod'])->tezina_pakovanja != 0){
+		if(proizvodi::find($_POST['proizvod'])->tezina_pakovanja > 0){
 			$data->kolicina = proizvodi::find($_POST['proizvod'])->tezina_pakovanja * $_POST['novaKolicina'];
 			$data->pakovanje = $_POST['novaKolicina'];
 			$data->tezina_pakovanja = proizvodi::find($_POST['proizvod'])->tezina_pakovanja;
@@ -61,7 +61,7 @@ class CrudController extends \BaseController {
 
 		$kol = proizvodi::find($_POST['proizvod']);
 		
-		if($kol->tezina_pakovanja != 0){
+		if($kol->tezina_pakovanja > 0){
 			$kol->pakovanje = $kol->pakovanje + $_POST['novaKolicina'];
 			$kol->kolicina_proizvoda = $kol->kolicina_proizvoda + $kol->tezina_pakovanja * $_POST['novaKolicina'];
 			$kol->kolicina_pocetak = $kol->kolicina_pocetak + $kol->tezina_pakovanja * $_POST['novaKolicina'];
@@ -395,8 +395,8 @@ class CrudController extends \BaseController {
 	}
 	
 	public function magacin_delete($id){
-		$proizvod_magacin = proizvod_magacin::where('magacin', $id)->get();
-		if (!empty($proizvod_magacin)) {			
+		$proizvod_magacin = proizvod_magacin::where('magacin', $id)->first();
+		if (!empty($proizvod_magacin)) {		
 			Session::flash('err', AdminOptions::lang(291, Session::get('jezik.AdminOptions::server()')) );
 			return Redirect::back();
 		}
@@ -418,9 +418,9 @@ class CrudController extends \BaseController {
 			$data = proizvodi::find($_POST['proizvod']);
 			if($data->pakovanje == 0){
 				if ($data->kolicina_proizvoda < $_POST['kolicina']) {      	
-		Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'))); 
+					Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'))); 
 
-      	return Response::json(array('success'=>true)); 
+      				return Response::json(array('success'=>true)); 
 				}
 				$data->kolicina_proizvoda = $data->kolicina_proizvoda - $_POST['kolicina'];
 			}
@@ -428,9 +428,10 @@ class CrudController extends \BaseController {
 				if ($data->pakovanje < $_POST['kolicina']) {				
 					Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()'))); 
 
-      	return Response::json(array('success'=>true)); 
+      				return Response::json(array('success'=>true)); 
 				}
 				$data->pakovanje = $data->pakovanje - $_POST['kolicina'];
+				$data->kolicina_proizvoda = $data->kolicina_proizvoda - $_POST['kolicina'] * $data->tezina_pakovanja;
 			}
 			$data->update();
 
@@ -439,7 +440,7 @@ class CrudController extends \BaseController {
 				$proizvod_magacin = new proizvod_magacin;
 				$proizvod_magacin->proizvod = $_POST['proizvod'];
 				$proizvod_magacin->magacin = $_POST['magacin2'];
-				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+				if (proizvodi::find($_POST['proizvod'])->tezina_pakovanja == 0) {
 					$proizvod_magacin->kolicina = $_POST['kolicina'];
 				}
 				else{
@@ -465,7 +466,7 @@ class CrudController extends \BaseController {
 		else{
 			$magacin1 = proizvod_magacin::where('magacin', $_POST['magacin1'])->where('proizvod', $_POST['proizvod'])->first();
 			if(null != $magacin1){
-				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+				if (proizvodi::find($magacin1->proizvod)->tezina_pakovanja == 0) {
 					if ($magacin1->kolicina < $_POST['kolicina']) {
 						Session::flash('err', AdminOptions::lang(258, Session::get('jezik.AdminOptions::server()')) );
 						return Response::json(['result' => $magacin1]);
@@ -506,7 +507,7 @@ class CrudController extends \BaseController {
 
 			$magacin2 = proizvod_magacin::where('magacin', $_POST['magacin2'])->where('proizvod', $_POST['proizvod'])->first();
 			if(null != $magacin2){
-				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+				if (proizvodi::find($_POST['proizvod'])->tezina_pakovanja == 0) {
 					$magacin2->kolicina = $magacin2->kolicina + $_POST['kolicina'];
 				}
 				else{
@@ -519,7 +520,7 @@ class CrudController extends \BaseController {
 				$magacin2 = new proizvod_magacin;
 				$magacin2->proizvod = $_POST['proizvod'];
 				$magacin2->magacin = $_POST['magacin2'];
-				if (proizvodi::find($_POST['proizvod'])->pakovanje == 0) {
+				if (proizvodi::find($_POST['proizvod'])->tezina_pakovanja == 0) {
 					$magacin2->kolicina = $_POST['kolicina'];
 				}
 				else{
@@ -528,7 +529,21 @@ class CrudController extends \BaseController {
 				$magacin2->created_at = date('Y-m-d');
 				$magacin2->save();
 			}
+		}		
+	}
+
+	public function magacin_ajax($id){
+		if ($id == -1) {
+			$podaci = proizvodi::where('aktivan', 1)->where('kolicina_proizvoda', '>', 0)->orWhere('pakovanje', '>', 0)->get();
+			$pom = 0;
 		}
-		
+		else{
+			$podaci1 = proizvod_magacin::where('magacin', $id)->distinct()->get(['proizvod'])->where('kolicina', '>', 0)->orWhere('pakovanje', '>', 0);
+			foreach ($podaci1 as $key => $podatak) {
+				$podaci[$key] = proizvodi::find($podatak->proizvod);
+			}
+			$podaci = array_values(array_filter(array_unique($podaci)));
+		}
+		return Response::json(['podaci' => $podaci]);
 	}
 }

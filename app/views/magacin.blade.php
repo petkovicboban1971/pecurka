@@ -89,11 +89,11 @@
 						<option selected disabled>
 							{{ AdminOptions::lang(162, Session::get('jezik.AdminOptions::server()')) }}
 						</option>
-						<option value="-1">
+						<option value="-1" data-id="-1">
 							{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}
 						</option>
 						@foreach($magacini as $magacin)
-							<option value = '{{ $magacin->id }}'>{{ $magacin->naziv }}</option>
+							<option value = '{{ $magacin->id }}' data-id="{{ $magacin->id }}">{{ $magacin->naziv }}</option>
 						@endforeach
 					</select>
 				</td>
@@ -111,12 +111,10 @@
 					<select name="proizvod" id="proizvod" disabled>
 						<option selected disabled>
 							{{ AdminOptions::lang(203, Session::get('jezik.AdminOptions::server()')) }}
-						</option>
-						@foreach($proizvodi as $proizvod)
-							@if(($proizvod->kolicina_proizvoda > 0) || ($proizvod->pakovanje > 0))
-								<option value = '{{ $proizvod->id }}'>{{ $proizvod->naziv_proizvoda }}</option>
-							@endif
-						@endforeach
+						</option>                    
+						@foreach (proizvodi::where('aktivan', 1)->get() as $value)
+	                        <option value="{{ $value->id }}">{{ $value->naziv_proizvoda }}</option>
+	                    @endforeach
 					</select>					
 				</td>
 				<td>
@@ -133,7 +131,7 @@
 		<table border="0" cellpadding="0" cellspacing="0" style="width: 150px !important;">
 			<thead>
 				<tr>
-					<th colspan="2">Lager</th>				
+					<th colspan="2">{{ AdminOptions::lang(250, Session::get('jezik.AdminOptions::server()')) }}</th>				
 				</tr>	
 			</thead>
 			<tr>
@@ -163,7 +161,7 @@
 									{{ proizvodi::find($magacin1->proizvod)->naziv_proizvoda }}
 								</td>	
 								<td>
-									{{ $magacin1->kolicina }}
+									{{ proizvodi::find($magacin1->proizvod)->tezina_pakovanja == 0 ? $magacin1->kolicina : $magacin1->pakovanje }}
 								</td>
 							</tr>
 						@endif
@@ -193,22 +191,53 @@
 			}
 		}); 
     });
-    $('#magacin1').on('change', function(e){
+    $('select[name="magacin1"]').on('change', function(e){
     	e.preventDefault();
     	$('#magacin2').removeAttr('disabled');
     	$('#magacin1').prop('disabled', true);
+    	var magacin_ajax = $(this).val();  
+    	//$('select[name="magacin1"]').on('change', function() {
+        var stateID = $(this).val();
+
+        if(stateID) {
+	    	$.ajax({
+	    		url: '/magacin_ajax/'+magacin_ajax,
+	    		method: "GET", 
+	    		data:$(this).serialize(),
+	    		dataType:"json",
+	    		success:function(data){
+                    $('select[name="proizvod"]').empty();
+                    
+                    $.each(data, function(key, value) {
+                    	for (var i = 0; i < data.podaci.length; i ++) {        	
+                    		if(!(data.podaci[i].naziv_proizvoda)){
+                    			var univerzal = data.podaci[i].proizvod;
+                    		}
+                    		else{
+                    			var univerzal = data.podaci[i].naziv_proizvoda;
+                    		}
+                        	$('select[name="proizvod"]').append('<option value="'+ data.podaci[i].id +'">'+ univerzal +'</option>');   
+                    	}	                    
+                    });
+	    		} 
+	    	})
+	    }
+	    else{
+            $('select[name="proizvod"]').empty();
+        }
     });
 
     $('#magacin2').on('change', function(e){
     	e.preventDefault();
     	$('#proizvod').removeAttr('disabled');
     	$('#magacin2').prop('disabled', true);
+    	$('.kolicina1').removeAttr('disabled');
     });
 
     $('#proizvod').on('change', function(e){
     	e.preventDefault();
-    	$('.kolicina1').removeAttr('disabled');
-    	$('#proizvod').prop('disabled', true);
+    	$('.kolicina1').removeAttr('disabled');/*
+    	$('#proizvod').prop('disabled', true);*/
     });
 
     $('.kolicina1').on('keyup', function(e){
@@ -244,5 +273,7 @@
 					}); 
                 }
             });
+        
     });
+    
 </script>
