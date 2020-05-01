@@ -1,4 +1,4 @@
-Example of repositorie: <b><h4><i><a href="https://mushrooms.bexter.rs" target="_blank">mushrooms.bexter.rs</a></i></h4></b>
+Example of repositorie: (username: admin, password: admin)<b><h4><i><a href="https://mushrooms.bexter.rs" target="_blank">mushrooms.bexter.rs</a></i></h4></b>
 
 
 
